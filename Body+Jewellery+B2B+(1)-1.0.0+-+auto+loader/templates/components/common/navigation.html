@@ -1,0 +1,168 @@
+<nav class="navUser">
+    <ul class="navUser-section navUser-section--alt">
+        <li class="navUser-item navUser-item--wishlist">
+            <a href="/wishlist.php" class="navUser-action">
+                <svg width="23" height="20" viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.2913 2.61183C19.7805 2.10083 19.1741 1.69547 18.5066 1.41891C17.8392 1.14235 17.1238 1 16.4013 1C15.6788 1 14.9634 1.14235 14.2959 1.41891C13.6285 1.69547 13.022 2.10083 12.5113 2.61183L11.4513 3.67183L10.3913 2.61183C9.3596 1.58013 7.96032 1.00053 6.50129 1.00053C5.04226 1.00053 3.64298 1.58013 2.61129 2.61183C1.5796 3.64352 1 5.04279 1 6.50183C1 7.96086 1.5796 9.36013 2.61129 10.3918L11.4513 19.2318L20.2913 10.3918C20.8023 9.88107 21.2076 9.27464 21.4842 8.60718C21.7608 7.93972 21.9031 7.22431 21.9031 6.50183C21.9031 5.77934 21.7608 5.06393 21.4842 4.39647C21.2076 3.72901 20.8023 3.12258 20.2913 2.61183Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </li>
+
+        {{#or customer (unless theme_settings.restrict_to_login)}}
+            {{> components/common/currency-selector}}
+        {{/or}}
+
+        {{#if customer.store_credit.value '>' 0}}
+            <li class="navUser-item">
+                <a class="navUser-action navUser-action--storeCredit"
+                   data-dropdown="storeCredit-dropdown"
+                   data-options="align:bottom"
+                   href="{{urls.cart}}"
+                   aria-label="{{lang 'common.store_credit_overview' credit=customer.store_credit.formatted}}"
+                >
+                    <span class="navUser-action-divider">
+                        {{lang 'common.store_credit_overview' credit=customer.store_credit.formatted}}
+                    </span>
+                </a>
+                <div class="dropdown-menu" id="storeCredit-dropdown" data-dropdown-content aria-hidden="true">
+                    {{{lang 'common.store_credit' store_credit=customer.store_credit.formatted}}}
+                </div>
+            </li>
+        {{/if}}
+        {{#if theme_settings.social_icon_placement_top}}
+            <li class="navUser-item navUser-item--social">
+                {{> components/common/social-links}}
+            </li>
+            <li class="navUser-item navUser-item--divider">|</li>
+        {{/if}}
+        {{#if settings.gift_certificates_enabled}}
+            <li class="navUser-item">
+                <a class="navUser-action"
+                   href="{{urls.gift_certificate.purchase}}"
+                   aria-label="{{lang 'common.gift_cert'}}"
+                >
+                    {{lang 'common.gift_cert'}}
+                </a>
+            </li>
+        {{/if}}
+        <li class="navUser-item navUser-item--account">
+            {{#if customer}}
+                <a class="navUser-action has-dropdown"
+                   href="{{urls.account.index}}"
+                   data-dropdown="userDropdown"
+                   aria-controls="userDropdown"
+                   aria-expanded="false"
+                   aria-label="{{lang 'common.account'}}"
+                >
+                    <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 19V17C17 15.9391 16.5786 14.9217 15.8284 14.1716C15.0783 13.4214 14.0609 13 13 13H5C3.93913 13 2.92172 13.4214 2.17157 14.1716C1.42143 14.9217 1 15.9391 1 17V19M13 5C13 7.20914 11.2091 9 9 9C6.79086 9 5 7.20914 5 5C5 2.79086 6.79086 1 9 1C11.2091 1 13 2.79086 13 5Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+
+                    <span class="navUser-item-text">
+                        <span class="navUser-item-topline">{{lang "header.nav.account.hello" }}</span>
+                        <span class="navUser-item-mainline navUser-item-name">{{ customer.name }}</span>
+                    </span>
+
+                    <svg class="navUser-action-dropdown-icon" width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1L7 7L13 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu--account" id="userDropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+                    <div class="dropdown-menu-inner">
+                        <button class="dropdown-menu-close" type="button"
+                        data-dropdown="userDropdown"
+                        aria-controls="userDropdown"
+                        aria-expanded="false"
+                        aria-label="{{lang 'common.account'}}"></button>
+                        <h2>{{lang "header.nav.account.my_account"}}</h2>
+                        <ul>
+                            <li class="dropdown-menu-item">
+                                <a
+                                href="{{urls.account.details}}"
+                                aria-label="{{lang "header.nav.account.my_account"}}"
+                                >
+                                {{lang "header.nav.account.my_account"}}
+                                </a>
+                            </li>
+                            <li class="dropdown-menu-item">
+                                <a
+                                href="{{urls.account.orders.all}}"
+                                aria-label="{{lang "header.nav.account.my_orders"}}"
+                                >
+                                {{lang "header.nav.account.my_orders"}}
+                                </a>
+                            </li>
+                            <li class="dropdown-menu-item">
+                                <a
+                                href="/wishlist.php"
+                                aria-label="{{lang "header.nav.account.my_favourites"}}"
+                                >
+                                {{lang "header.nav.account.my_favourites"}}
+                                </a>
+                            </li>
+                            <li class="dropdown-menu-item">
+                                <a
+                                href="/"
+                                aria-label="{{lang "header.nav.account.my_recommendations"}}"
+                                >
+                                {{lang "header.nav.account.my_recommendations"}}
+                                </a>
+                            </li>
+                            <li class="dropdown-menu-item">
+                                <a
+                                href="/"
+                                aria-label="{{lang "header.nav.account.newsletter_subscription"}}"
+                                >
+                                {{lang "header.nav.account.newsletter_subscription"}}
+                                </a>
+                            </li>
+                            <li class="dropdown-menu-item dropdown-menu-item--highlight">
+                                <a
+                                href="{{urls.auth.logout}}"
+                                aria-label="{{lang "common.logout"}}"
+                                >
+                                {{lang "common.logout"}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {{else}}
+                <a class="navUser-action"
+                   href="{{urls.auth.login}}"
+                   aria-label="{{lang 'common.login'}}"
+                >
+                    <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 19V17C17 15.9391 16.5786 14.9217 15.8284 14.1716C15.0783 13.4214 14.0609 13 13 13H5C3.93913 13 2.92172 13.4214 2.17157 14.1716C1.42143 14.9217 1 15.9391 1 17V19M13 5C13 7.20914 11.2091 9 9 9C6.79086 9 5 7.20914 5 5C5 2.79086 6.79086 1 9 1C11.2091 1 13 2.79086 13 5Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            {{/if}}
+        </li>
+        <li class="navUser-item navUser-item--cart">
+            <a class="navUser-action"
+               data-cart-preview
+               href="{{urls.cart}}"
+               aria-label="{{lang 'cart.nav_aria_label'}}"
+            >
+                <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1H4.63636L7.07273 13.1148C7.15586 13.5313 7.38355 13.9055 7.71595 14.1718C8.04835 14.4381 8.46427 14.5796 8.89091 14.5714H17.7273C18.1539 14.5796 18.5698 14.4381 18.9022 14.1718C19.2346 13.9055 19.4623 13.5313 19.5455 13.1148L21 5.52381H5.54545M9.18182 19.0952C9.18182 19.5949 8.7748 20 8.27273 20C7.77065 20 7.36364 19.5949 7.36364 19.0952C7.36364 18.5956 7.77065 18.1905 8.27273 18.1905C8.7748 18.1905 9.18182 18.5956 9.18182 19.0952ZM19.1818 19.0952C19.1818 19.5949 18.7748 20 18.2727 20C17.7707 20 17.3636 19.5949 17.3636 19.0952C17.3636 18.5956 17.7707 18.1905 18.2727 18.1905C18.7748 18.1905 19.1818 18.5956 19.1818 19.0952Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                <span class="navUser-item-text">
+                    <span class="navUser-item-topline" data-single="{{lang "header.cart.item"}}" data-multi="{{lang "header.cart.items"}}" data-cart-quantity="0">
+                        <span class="cart-quantity" data-view-content="cart-quantity">0</span>
+                    </span>
+                    <div class="navUser-item-cart-total">
+                        <span class="navUser-item-mainline" data-view-content="cart-total" data-currency="{{settings.money.currency_token}}">{{settings.money.currency_token}}0.00</span>
+                    </div>
+                    
+                </span>
+            </a>
+
+            <div class="minicart-wrapper" id="cart-preview-wrapper">
+                <div id="cart-preview-dropdown"></div>
+            </div>
+        </li>
+    </ul>
+</nav>

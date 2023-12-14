@@ -1,0 +1,98 @@
+#previewModal {
+    .previewCart {
+        flex-direction: column-reverse;
+
+        @include breakpoint("medium") {
+            flex-direction: row-reverse;
+        }
+    
+        .previewCartCheckout {
+            height: 100%;
+
+            .previewCart-button-basket,
+            .previewCart-button-checkout,
+            .previewCart-button-continue {
+                padding: 15px;
+                display: flex;
+            }
+
+            .previewCart-button-checkout,
+            .previewCart-button-continue {
+                font-size: remCalc(16);
+                justify-content: center;
+            }
+
+            &-subtotal {
+                color: #171718;
+                font-size: remCalc(18);
+                font-weight: 500;
+            }
+
+            [data-cart-quantity] {
+                font-size: remCalc(18);
+                font-family: 'Montserrat', sans-serif !important;
+                font-weight: bold;
+            }
+        }
+    
+        .productView {
+            flex-direction: column;
+
+            @include breakpoint("medium") {
+                flex-direction: row;
+            }
+
+            &-title {
+                text-align: left;
+            }
+
+            &-price {
+                font-size: 25px;
+            }
+    
+            &-image {
+                width: 350px;
+                height: auto;
+                margin: auto;
+
+                @include breakpoint("medium") {
+                    height: 350px;
+                    margin: 0;
+                }
+            }
+    
+            &-details {
+                width: auto;
+
+                .productView-info {
+                    margin-bottom: 0;
+
+                    &:not(:first-of-type) {
+                        margin-top: remCalc(8);
+                    }
+
+                    &-name {
+                        margin-top: 0;
+                        font-size: remCalc(18);
+                        font-weight: bold;
+                        text-transform: capitalize;
+                        margin-right: remCalc(10);
+
+                        @include breakpoint("medium") {
+                            margin-right: 4;
+                        }
+                    }
+
+                    &-value {
+                        font-size: remCalc(16);
+                        line-height: 28px;
+
+                        @include breakpoint("medium") {
+                            line-height: initial;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,60 @@
+<div class="accordion-block">
+    {{> components/faceted-search/faceted-search-navigation}}
+
+    <div id="facetedSearch-content--{{dashcase facet}}" class="accordion-content{{#unless start_collapsed}} is-open{{/unless}}">
+        <div class="slide-out-title" data-collapsible="#facetedSearch-content--{{dashcase facet}}">
+            <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 13L3 8L8 3" stroke="white" stroke-width="3" stroke-linecap="square"/>
+            </svg>
+    
+            {{title}}
+        </div>
+        <form id="facet-range-form" class="form" method="get" data-faceted-search-range novalidate>
+            <input type="hidden" name="search_query" value="{{search_query}}">
+            {{#if this.sort}}
+                <input type="hidden" name="sort" value="{{this.sort}}">
+            {{/if}}
+            <fieldset class="form-fieldset">
+                <div class="form-minMaxRow">
+                    <div class="form-field">
+                        <input
+                            name="min_price"
+                            placeholder="{{lang 'search.faceted.range.min-placeholder'}}"
+                            min="0"
+                            class="form-input form-input--small"
+                            required
+                            type="number"
+                            value="{{min_price}}"
+                        />
+                    </div>
+
+                    <div class="form-field">
+                        <input
+                            name="max_price"
+                            placeholder="{{lang 'search.faceted.range.max-placeholder'}}"
+                            min="0"
+                            class="form-input form-input--small"
+                            required
+                            type="number"
+                            value="{{max_price}}"
+                        />
+                    </div>
+
+                    <div class="form-field">
+                        <button class="button button--small" type="submit">
+                            {{lang 'search.faceted.range.update'}}
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-inlineMessage"></div>
+            </fieldset>
+        </form>
+        <div class="buttons-wrapper" data-close-filters style="display: none;">
+            <button class="button button-view-products">
+                View Products
+            </button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,113 @@
+.reorder-cta {
+    background-color: #292A2D;
+    color: #fff;
+    display: block;
+    margin-top: 4px;
+    padding: 20px;
+    text-decoration: none;
+
+    &:hover {
+        color: #fff;
+    }
+
+    &.--login {
+        font-weight: 700;
+        text-align: center;
+    }
+
+    h2 {
+        color: inherit;
+        flex-basis: 0;
+        flex-grow: 1;
+        flex-shrink: 0;
+        font-size: remCalc(24px);
+        font-weight: 700;
+        margin: 0;
+        text-align: center;
+        text-transform: uppercase;
+
+        @include breakpoint("medium") {
+            flex-basis: auto;
+            flex-grow: 0;
+            font-size: remCalc(32px);
+            text-align: left;
+        }
+
+        @include breakpoint("large") {
+            flex-basis: auto;
+            flex-grow: 0;
+            font-size: remCalc(48px);
+        }
+    }
+
+    svg {
+        flex-basis: auto;
+        flex-grow: 0;
+        flex-shrink: 0;
+        height: auto;
+
+        &:first-child {
+            margin-right: auto;
+
+            @include -breakpoint("medium") {
+                flex-basis: 36px;
+            }
+        }
+
+        &:last-child {
+            margin-left: auto;
+
+            @include -breakpoint("medium") {
+                flex-basis: 14px;
+            }
+        }
+    }
+}
+
+.reorder-cta_inner {
+    align-items: center;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    max-width: 1060px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include -breakpoint("medium") {
+        flex-wrap: wrap;
+    }
+
+    @include breakpoint("medium") {
+        gap: 40px;
+    }
+}
+
+.reorder-cta_text {
+    font-size: remCalc(14px);
+    font-weight: 500;
+    line-height: remCalc(24px);
+    flex-basis: 100%;
+    flex-grow: 0;
+
+    @include -breakpoint("medium") {
+        order: 999;
+    }
+
+    @include breakpoint("medium") {
+        flex-basis: 420px;
+    }
+
+    h3 {
+        color: inherit;
+        font-size: remCalc(20px);
+        margin: 0;
+
+        span {
+            color: #CD497C;
+        }
+    }
+
+    p {
+        margin: 0;
+    }
+}

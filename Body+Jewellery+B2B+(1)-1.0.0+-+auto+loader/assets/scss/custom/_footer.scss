@@ -1,0 +1,170 @@
+@import "footer/accordion";
+@import "footer/social-links";
+@import "footer/seo";
+@import "footer/newsletter";
+@import "footer/copyright";
+
+.footer {
+    font-family: 'Franklin Gothic', sans-serif !important;
+    background-color: #171719;
+    border: none;
+    color: #fff;
+    padding: 0;
+
+    .container {
+        padding-left: 16px;
+        padding-right: 16px;
+
+        @include breakpoint("medium") {
+            padding-left: 32px;
+            padding-right: 32px;
+        }
+    }
+}
+
+.footer-top,
+.footer-bottom {
+    padding: 20px 0;
+
+    @include breakpoint("medium") {
+        padding: 40px 0;
+    }
+}
+
+.footer-bottom {
+    background-color: #292A2D;
+}
+
+.footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+
+    @include -breakpoint("medium") {
+        flex-direction: column;
+    }
+
+    &.--accordions {
+        @include -breakpoint("medium") {
+            gap: 0;
+
+            .footer-col {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+                &:first-child {
+                    border-bottom: none;
+                    order: 999;
+                }
+            }
+        }
+    }
+
+    + .footer-row {
+        margin-top: 40px;
+    }
+
+    .footer-col {
+        @include breakpoint("medium") {
+            flex-basis: calc(33.333% - 40px);
+            flex-grow: 1;
+        }
+    }
+
+    .footer-newsletter {
+        @include breakpoint("medium") {
+            flex-basis: 100%;
+            flex-grow: 0;
+        }
+
+        @include breakpoint("large") {
+            flex-basis: calc(50% - 40px);
+            flex-grow: 1;
+        }
+    }
+
+    .footer-menu {
+        @include breakpoint("medium") {
+            flex-basis: calc(50% - 40px);
+            flex-grow: 0;
+        }
+
+        @include breakpoint("large") {
+            flex-basis: calc(25% - 40px);
+            flex-grow: 0;
+        }
+    }
+}
+
+.footer-menu-title,
+.footer-accordion-title,
+.footer-info-heading,
+.footer-seo-title {
+    color: inherit;
+    font-size: remCalc(20px);
+    font-weight: 600;
+    margin: 0 0 20px;
+    text-transform: uppercase;
+
+    @include breakpoint("large") {
+        font-size: remCalc(24px);
+    }
+}
+
+.footer-accordion-title {
+    @include -breakpoint("medium") {
+        margin-bottom: 0;
+    }
+}
+
+.footer-icon-menu-list {
+    font-family: 'Montserrat', sans-serif !important;
+    display: block;
+    font-size: remCalc(15px);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        + li {
+            margin-top: 20px;
+
+            @include breakpoint("medium") {
+                margin-top: 30px;
+            }
+        }
+    }
+
+    a {
+        align-items: center;
+        color: inherit;
+        display: flex;
+        font-weight: 700;
+        gap: 8px;
+        text-decoration: none;
+
+        @include breakpoint("medium") {
+            flex-basis: 16px;
+        }
+    }
+
+    svg {
+        flex-basis: 16px;
+        flex-grow: 0;
+        max-height: 16px;
+
+        @include breakpoint("medium") {
+            flex-basis: 28px;
+            max-height: 20px;
+        }
+    }
+}
+
+.footer-store-info {
+    + .footer-store-info {
+        margin-top: 1.5rem;
+    }
+
+    address {
+        font-style: normal;
+    }
+}

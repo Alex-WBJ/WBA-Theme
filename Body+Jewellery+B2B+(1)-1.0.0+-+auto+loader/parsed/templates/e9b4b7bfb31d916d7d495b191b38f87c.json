@@ -1,0 +1,3 @@
+{
+  "components/faceted-search/selected-facets": "\n{{#if remove_all_url}}\n    <a class=\"filters-removeAll\" href=\"{{remove_all_url}}\" data-faceted-search-facet>\n        {{lang 'search.faceted.selected.clear-all'}}\n    </a>\n{{/if}}\n"
+}

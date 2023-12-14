@@ -1,0 +1,151 @@
+{{#if banners.bottom}}
+    {{#if settings.data_tag_enabled}}
+        <div class="banners" data-banner-location="bottom">
+            {{#each (limit banners.bottom_metadata 1)}}
+                <div class="banner" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-name="{{this.banner-name}}">
+                    <div data-event-type="promotion-click">
+                        {{{this.content}}}
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class="banners" data-banner-location="bottom">
+            <div class="banner">
+                {{{limit banners.bottom 1}}}
+            </div>
+        </div>
+    {{/if}}
+
+{{/if}}
+<footer class="footer" role="contentinfo">
+    <h2 class="footer-title-sr-only">{{lang 'footer.title'}}</h2>
+
+    <div class="footer-top">
+        <div class="container">
+            <div class="footer-row">
+                <!-- Newsletter -->
+                <article class="footer-newsletter" data-section-type="newsletterSubscription">
+                    {{#if settings.show_newsletter_box}}
+                        {{> components/common/subscription-form}}
+                    {{/if}}
+                </article>
+        
+                <!-- Help & Support -->
+                <div class="footer-menu footer-menu--help-and-support">
+                    <h3 class="footer-menu-title">{{lang "footer.help_and_support.title"}}</h3>
+
+                    <ul class="footer-icon-menu-list">
+                        <li>
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" d="M12 11.1V1H1v10.1h11Zm0 0h5V7.2L14.8 5H12v6Zm-6 2c0 1-.7 1.9-1.7 1.9s-1.8-.9-1.8-2c0-1 .8-1.9 1.8-1.9s1.8.9 1.8 2Zm9.5 0c0 1-.8 1.9-1.8 1.9s-1.8-.9-1.8-2c0-1 .8-1.9 1.8-1.9s1.8.9 1.8 2Z"/></svg>
+                                <span class="footer-icon-menu-item-label">{{lang "footer.help_and_support.delivery"}}</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 22"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.9 16v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-14.6-9.1 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 3 1h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.5 2.1L7 9a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.2-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+                                <span class="footer-icon-menu-item-label">{{lang "footer.help_and_support.call_us"}}</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 18"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 3a2 2 0 0 0-2-2H3a2 2 0 0 0-2 2m20 0v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3m20 0-10 7L1 3"/></svg>
+                                <span class="footer-icon-menu-item-label">{{lang "footer.help_and_support.email_us"}}</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 27 22"><path fill="#fff" d="M23.9 8.9h-.6a9.8 9.8 0 0 0-19.6 0h-.6A3.1 3.1 0 0 0 0 12v3.8C0 17.6 1.4 19 3.1 19h1.5c.5 0 1-.5 1-1V9.8a8 8 0 0 1 15.9 0V18c0 .7-.6 1.3-1.3 1.3h-3c-.3-.5-.8-.9-1.5-.9-1 0-1.7.8-1.7 1.8s.8 1.8 1.7 1.8c.7 0 1.3-.3 1.6-.9h2.9c1.4 0 2.6-.9 3-2.1h.7c1.7 0 3.1-1.4 3.1-3.2V12c0-1.7-1.4-3.1-3.1-3.1ZM3.7 17H3c-.7 0-1.2-.6-1.2-1.3V12c0-.7.5-1.3 1.2-1.3h.6v6.4ZM25 15.8c0 .7-.5 1.3-1.2 1.3h-.6v-6.4h.6c.7 0 1.2.6 1.2 1.3v3.8Z"/></svg>
+                                <span class="footer-icon-menu-item-label">{{lang "footer.help_and_support.support"}}</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="">                                
+                                <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19 10C19 17 10 23 10 23C10 23 1 17 1 10C1 7.61305 1.94821 5.32387 3.63604 3.63604C5.32387 1.94821 7.61305 1 10 1C12.3869 1 14.6761 1.94821 16.364 3.63604C18.0518 5.32387 19 7.61305 19 10Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10 13C11.6569 13 13 11.6569 13 10C13 8.34315 11.6569 7 10 7C8.34315 7 7 8.34315 7 10C7 11.6569 8.34315 13 10 13Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>    
+                                <span class="footer-icon-menu-item-label">{{lang "footer.help_and_support.find_store"}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--  -->
+        
+                <!-- Follow Us -->
+                <div class="footer-menu footer-menu--follow-us">
+                    <h3 class="footer-menu-title">{{lang "footer.follow_us.title"}}</h3>
+
+                    {{> components/common/social-links}}
+                </div>
+            </div>
+            {{#if theme_settings.show_seo_text}}
+            <div class="footer-row">
+                <!-- SEO Text -->
+                <div class="footer-seo">
+                    <h3 class="footer-seo-title">{{lang "footer.seo_text.title"}}</h3>
+                    <div class="footer-seo-content">
+                        {{{region name="footer-seo-text--global"}}}
+                    </div>
+                    <a href="/about" class="button footer-seo-toggle">
+                        {{lang "footer.seo_text.toggle"}}
+                    </a>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-row --accordions">
+                <!-- Find Us -->
+                <div class="footer-col">
+                    <div class="footer-accordion --is-expanded --disabled">
+                        <h3 class="footer-accordion-title">{{lang "footer.find_us.title"}}</h3>
+
+                        <div class="footer-accordion-content">
+                            <article class="footer-store" data-section-type="storeInfo">
+                                {{#if settings.address}}
+                                <div class="footer-store-info">
+                                    <p>{{lang "footer.find_us.address"}}</p>
+                                    <address>{{nl2br settings.address}}</address>
+                                </div>
+                                {{/if}}
+                                
+                                <div class="footer-store-info">
+                                    <p>{{lang "footer.find_us.opening"}}</p>
+                                    {{{region name="footer_opening_info--global"}}}
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Useful Resources -->
+                <div class="footer-col">
+                    {{{region name="footer_useful_resources--global"}}}
+                </div>
+
+                <!-- Customer Services -->
+                <div class="footer-col">
+                    {{{region name="footer_customer_services--global"}}}
+                </div>
+            </div>
+    
+            {{{region name="ssl_site_seal--global"}}}
+
+            <!-- Copyright -->
+            {{#if theme_settings.show_copyright_footer}}
+                <div class="footer-copyright">
+                    {{{region name="footer_copyright--global"}}}
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</footer>

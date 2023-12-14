@@ -1,0 +1,72 @@
+---
+cart: true
+products:
+    new:
+        limit: {{theme_settings.homepage_new_products_count}}
+    featured:
+        limit: {{theme_settings.homepage_featured_products_count}}
+    top_sellers:
+        limit: {{theme_settings.homepage_top_products_count}}
+---
+{{inject 'cancelButtonText' (lang 'common.cancel')}}
+{{#partial "page"}}
+{{inject 'invalidEntryMessage' (lang 'cart.invalid_entry_message')}}
+<div class="page">
+    {{> components/common/same-day-dispatch}}
+
+    <div class="page-content" data-cart>
+        <div data-cart-status>
+            {{> components/cart/status-messages}}
+        </div>
+
+        {{#if cart.items.length}}
+            <div class="cart-wrapper grid-layout --gap-0">
+                <div class="loadingOverlay"></div>
+
+                <div data-cart-content class="col-12 col-l-8 cart-col">
+                    {{> components/cart/content}}
+                </div>
+
+                <div class="col-12 col-l-4 cart-col --summary">
+                    <h2>{{lang "cart.summary"}}</h2>
+                    <div data-cart-totals>
+                        {{> components/cart/totals}}
+
+                        {{{region name="cart_below_totals"}}}
+            
+                        <div data-cart-additional-checkout-buttons class="cart-additionalCheckoutButtons cart-content-padding-right">
+                            {{> components/cart/additional-checkout-buttons}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{else}}
+            <h3 tabindex="0">{{lang 'cart.checkout.empty_cart'}}</h3>
+        {{/if}}
+        {{#if cart.items.length}}
+            <div id="may-also-like" data-recommended-products-carousel data-loaditems="{{#each cart.items}}{{product_id}},{{/each}}">
+                <div class="">
+                    <div>
+                        <div class="carousel-slider --title">
+                            <div class="carousel-slider_top">
+                                <h2>You May Also Like</h2>
+                                <div class="carousel-slider_controls"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="carousel-slider">                
+                            <div class="carousel-slider_body">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+        <!-- Temp until cart related products can be added -->
+        {{{region name="cart_below"}}}
+    </div>
+</div>
+{{/partial}}
+{{> layout/base}}

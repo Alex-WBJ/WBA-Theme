@@ -1,0 +1,8 @@
+@mixin -breakpoint($size) {
+    @if type-of($size) == "number" {
+        @media (max-width: $size - 1) { @content; }
+    }
+    @else {
+        @media (max-width: screenSize($size) - 1) { @content; }
+    }
+}

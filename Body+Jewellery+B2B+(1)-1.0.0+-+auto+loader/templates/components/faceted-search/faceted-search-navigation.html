@@ -1,0 +1,21 @@
+<div class="accordion-nav-clear-holder">
+    <button type="button"
+         class="accordion-navigation toggleLink{{#unless start_collapsed}} is-open{{/unless}}"
+         data-collapsible="#facetedSearch-content--{{dashcase facet}}"
+         aria-label="{{lang 'search.faceted.toggleSection' title=title}}"
+    >
+        <span class="accordion-title">
+            {{title}} 
+        </span>
+
+        <span>
+            <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 14L8 8L2 2" stroke="#171718" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+            </svg>
+            
+        </span>
+    </button>
+    {{#if selected}}
+        <a href="{{remove_url}}" class="facetedSearch-clearLink" data-faceted-search-facet>{{lang 'search.faceted.clear'}}</a>
+    {{/if}}
+</div>

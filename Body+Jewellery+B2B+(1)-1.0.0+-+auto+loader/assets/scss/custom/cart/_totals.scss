@@ -1,0 +1,119 @@
+[data-cart-totals] {
+    --height: 82px;
+}
+
+.cart-totals-wrap {
+    overflow: hidden;
+    transition: height 0.4s;
+
+    @include -breakpoint("medium") {
+        height: var(--height);
+    }
+}
+
+.cart-totals {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    float: none;
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+    width: auto;
+
+    @include -breakpoint("medium") {
+        border-top: 1px solid #D6DBE2;
+        cursor: pointer;
+    }
+
+    @include breakpoint("medium") {
+        font-size: remCalc(16px);
+        margin-top: 24px;
+    }
+
+    .cart-total--grand-total {
+        font-size: remCalc(20px);
+        margin-top: 0;
+        padding: 24px 0 8px;
+
+        @include -breakpoint("medium") {
+            order: -1;
+        }
+
+        @include breakpoint("medium") {
+            font-size: remCalc(28px);
+            padding: 16px 0 16px;
+        }
+    }
+
+    .cart-total {
+        @extend %unsetClearFix;
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 16px;
+        padding-right: 16px;
+        margin-bottom: 16px;
+
+        @include breakpoint("medium") {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        + .cart-total {
+            border-top: none;
+        }
+    }
+
+    .cart-total-label {
+        color: inherit;
+
+        span {
+            color: #80868f;
+            font-size: remCalc(12px);
+            text-transform: uppercase;
+        }
+    }
+
+    .cart-total-label, .cart-total-value {
+        float: none;
+        padding: 0;
+        width: auto;
+    }
+}
+
+.cart-totals-toggle {
+    background-color: #fff;
+    border: 1px solid #D6DBE2;
+    border-bottom-width: 0;
+    border-radius: 50% 50% 0 0/100% 100% 0 0;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 44px;
+    height: 16px;
+    transform: translate(0, 1px);
+    z-index: 1;
+
+    @include breakpoint("medium") {
+        display: none;
+    }
+
+    svg {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0) rotate(180deg);
+        transition: transform 0.4s;
+
+        .--expanded & {
+            transform: translate(-50%, 0) rotate(0);
+        }
+    }
+}
+
+
+.coupon-code-add, .coupon-code-cancel, .shipping-estimate-show, .gift-certificate-add, .gift-certificate-cancel {
+    color: inherit;
+    text-transform: uppercase;
+}

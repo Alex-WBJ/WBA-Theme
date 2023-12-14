@@ -1,0 +1,73 @@
+---
+product:
+    videos:
+        limit: {{theme_settings.productpage_videos_count}}
+    reviews:
+        limit: {{theme_settings.productpage_reviews_count}}
+    related_products:
+        limit: {{theme_settings.productpage_related_products_count}}
+    similar_by_views:
+        limit: {{theme_settings.productpage_similar_by_views_count}}
+---
+{{inject 'productId' product.id}}
+{{inject 'productType' 'bundle-tattoo'}}
+
+{{#partial "page"}}
+
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+    {{#each product.shipping_messages}}
+        {{> components/common/alert/alert-info message}}
+    {{/each}}
+
+    <div class="product-bundle">
+        {{> components/products/product-view type="bundle"}}
+
+        {{{region name="product_below_content"}}}
+
+        {{#if product.videos.list.length}}
+            {{> components/products/videos product.videos}}
+        {{/if}}
+
+        {{#all settings.show_product_reviews theme_settings.show_product_reviews (if theme_settings.show_product_details_tabs '!==' true)}}
+            {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
+        {{/all}}
+
+        {{#if product.related_products}}
+            <div>
+                {{#if settings.data_tag_enabled}}
+                    {{> components/products/carousel products=product.related_products columns=4 list="Related Products" title="Bought Together"}}
+                {{else}}
+                    {{> components/products/carousel products=product.related_products columns=4 title="Bought Together"}}
+                {{/if}}
+            </div>
+        {{/if}}
+
+        <div class="js-category-products" data-product="{{product.id}}">
+            <!-- Products in same category here -->
+            {{> components/products/carousel columns=4 title="Similar Products"}}
+        </div>
+
+        <div>
+            <!-- Trustpilot widget here -->
+            {{{region name="product-trustpilot--global"}}}
+        </div>
+    </div>
+
+    {{> components/products/schema}}
+
+    <div>
+        <script>
+            window.productData = [
+                {{#each product.custom_fields}}
+                {
+                    name: "{{name}}",
+                    value: "{{{value}}}"
+                },
+                {{/each}}
+            ];
+        </script>
+    </div>
+{{/partial}}
+
+{{> layout/base}}

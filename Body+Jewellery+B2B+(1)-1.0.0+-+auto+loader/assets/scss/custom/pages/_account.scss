@@ -1,0 +1,16 @@
+[class*="page_type__account_"],
+.page_type__shippingaddressform,
+.page_type__wishlists,
+.page_type__wishlist,
+.page_type__add_wishlist,
+.page_type__editaccount {
+    .breadcrumbs {
+        display: none;
+    }
+}
+
+.addressList {
+    .panel--address {
+        @extend %panel;
+    }
+}

@@ -1,0 +1,104 @@
+.tabs,
+.tabs .tab,
+.tabs-contents {
+    border-color: #D6DBE2;
+    border-style: solid;
+    border-width: 0;
+}
+
+.tabs {
+    align-items: stretch;
+    border-width: 1px;
+    display: flex;
+
+    .tab {
+        border-width: 0;
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 33.333%;
+
+        &.is-active {
+            border-bottom: none;
+            margin-bottom: 0;
+
+            .tab-title {
+                color: #171718;
+
+                &::before,
+                &::after {
+                    display: block;
+                }
+            }
+        }
+
+        + .tab {
+            border-left-width: 1px;
+        }
+    }
+
+    .tab-title {
+        align-items: center;
+        color: #80868F;
+        display: flex;
+        font-size: remCalc(14px);
+        font-weight: 700;
+        justify-content: center;
+        line-height: 1.2;
+        position: relative;
+        text-align: center;
+        text-transform: uppercase;
+
+        &::before,
+        &::after {
+            content: '';
+            display: none;
+            pointer-events: none;
+            position: absolute;
+        }
+
+        &::before {
+            background-color: #fff;
+            border: 1px solid #D6DBE2;
+            transform: translate(-50%, -50%) rotate(45deg);
+            transform-origin: center;
+            width: 1em;
+            height: 1em;
+            top: 100%;
+            left: 50%;
+            z-index: 0;
+        }
+
+        &::after {
+            background-color: #fff;
+            height: 1em;
+            width: 1.5em;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+
+        @include breakpoint("medium") {
+            font-size: remCalc(20px);
+            min-height: 4.2em;
+            
+        }
+    }
+}
+.tabs-contents {
+    border-width: 0 1px 1px;
+}
+.tab-content {
+    font-family: 'Franklin Gothic', sans-serif !important;
+    padding: remCalc(21px);
+
+    @include breakpoint("medium") {
+        padding: remCalc(50px) remCalc(100px);
+    }
+}
+.productView-description {
+    .--more-information {
+        &:not(.--show) {
+            display: none;
+        }
+    }
+}

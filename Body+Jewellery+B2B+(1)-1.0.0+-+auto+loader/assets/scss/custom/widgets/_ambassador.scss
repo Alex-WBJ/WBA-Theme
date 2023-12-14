@@ -1,0 +1,120 @@
+.ambassador {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+
+    &.layout-reverse {
+        @include breakpoint("medium") {
+            .ambassador_img_wrap {
+                order: -1;
+            }
+
+            .ambassador_wrap {
+                margin-left: 0;
+            }
+        }
+    }
+
+    > .grid-layout {
+        min-height: 38vw;
+
+        @include breakpoint("xlarge") {
+            min-height: 680px;
+        }
+    }
+
+    .carousel-slider_controls {
+        margin-top: 20px;
+    }
+
+    .ambassador_name {
+        font-size: remCalc(16px);
+        line-height: remCalc(20px);
+        margin: 0;
+        text-transform: uppercase;
+    
+        @include breakpoint("medium") {
+            font-size: remCalc(32px);
+            font-weight: 700;
+            line-height: remCalc(42px);
+        }
+    
+        small {
+            color: #CD497C;
+            display: block;
+            font-size: remCalc(14px);
+            line-height: remCalc(18px);
+            margin-top: 20px;
+        }
+    }
+    
+    .ambassador_about {
+        font-size: remCalc(14px);
+        line-height: remCalc(24px);
+        font-weight: 600;
+        margin: 20px 0 0;
+    }
+
+    .--products {
+        border-top: 1px solid #D6DBE2;
+
+        @include breakpoint("medium") {
+            border-top: unset;
+        }
+    }
+
+    
+    .card-product .card-text--price {
+        flex-wrap: wrap;
+        gap: 4px;
+
+        @include breakpoint("small") {
+            gap: 12px;
+        }
+    }
+
+    &_section:first-of-type {
+        border-top: 1px solid #D6DBE2;
+    }
+}
+
+.ambassador_img_wrap {
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid #D6DBE2;
+    @include breakpoint("medium") {
+        border-top: none;
+    }
+}
+
+.ambassador_img {
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    inset: 0;
+}
+
+.ambassador_wrap {
+    padding: 26px;
+
+    @include breakpoint("medium") {
+        max-width: 744px;
+        margin-left: auto;
+    }
+
+    &.--products {
+        padding: 0;
+        @include -breakpoint("medium") {
+            padding: 0;
+        }   
+    }
+}
+
+.page_title__jewellery {
+    .ambassador_img {
+        object-position: 50% 0%;
+    }
+}

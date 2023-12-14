@@ -1,0 +1,3 @@
+{
+  "components/common/login-for-pricing": "<p class=\"price-login\" translate><a href=\"/login.php\">{{lang 'common.login_for_pricing'}}</a></p>\n"
+}

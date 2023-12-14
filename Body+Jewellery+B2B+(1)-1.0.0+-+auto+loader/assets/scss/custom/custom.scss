@@ -1,0 +1,111 @@
+@import "mixins";
+@import "placeholders";
+@import "components/styles";
+@import "typography";
+@import "header";
+@import "footer";
+@import "widgets";
+@import "layout";
+@import "catalog";
+@import "pages";
+@import "pagination";
+@import "breadcrumbs";
+@import "tabs";
+@import "cart";
+@import "products";
+@import "previewCart/previewCart";
+
+:root {
+    --body-padding-top: 117px;
+    --colour-green: #21AC79;
+    --colour-red: #C00;
+    --colour-status-error: #C00;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+
+    @include -breakpoint("medium") {
+        padding-top: var(--body-padding-top);
+    }
+
+    &::after {
+        background-color: rgba(0, 0, 0, 0.5);
+        background-image: url('../img/loading.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 200px 200px;
+        content: '';
+        opacity: 0;
+        position: fixed;
+        transition: opacity 0.4s;
+        left: -100vw;
+        top: -100vh;
+        z-index: -1;
+    }
+
+    &.--loading {
+        &::after {
+            inset: 0;
+            opacity: 1;
+            z-index: 9999;
+        }
+    }
+}
+
+.skip-to-main-link {
+    transform: translate(-50%, calc(-100% - var(--body-padding-top)));
+}
+
+.container {
+    max-width: remCalc(1440px);
+
+    @include breakpoint("large") {
+        padding-left: remCalc(35px);
+        padding-right: remCalc(35px);
+    }
+}
+
+
+[data-content-region="footer_opening_info--global"],
+[data-content-region="footer_customer_services--global"],
+[data-content-region="footer_useful_resources--global"]
+{
+    [data-sub-layout] {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+[data-content-region="home_below_featured_products"]
+{
+    [data-sub-layout] {
+        @include -breakpoint("small") {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}
+[data-content-region="home_below_new_products"],
+[data-content-region="home_trustpilot_region--global"] {
+    .trustpilot-widget {
+        margin-bottom: 30px;
+    }
+}
+
+.messages-list {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+
+    > div {
+        background-color: var(--colour-green);
+        color: #fff;
+        font-size: remCalc(12px);
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 1em;
+    }
+}

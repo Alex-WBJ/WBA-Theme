@@ -1,0 +1,40 @@
+<!-- #if currency_selector.currencies.length '>' 1 -->
+{{#if true}}
+<li class="navUser-item">
+    <a class="navUser-action navUser-action--currencySelector has-dropdown"
+        href="#"
+        data-dropdown="currencySelection"
+        aria-controls="currencySelection"
+        aria-expanded="false"
+    >
+
+        <span class="navUser-item-text">
+            <span class="navUser-item-topline">{{lang "header.nav.currency.currency" }}</span>
+            <span class="navUser-item-mainline">{{settings.money.currency_token}} {{ currency_selector.active_currency_code }}</span>
+        </span>
+
+        <svg class="navUser-action-dropdown-icon" width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L7 7L13 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+    </a>
+    <ul class="dropdown-menu" id="currencySelection" data-dropdown-content aria-hidden="true" tabindex="-1">
+        {{#each currency_selector.currencies}}
+        <li class="dropdown-menu-item">
+            <a href="{{{switch_url}}}"
+                data-currency-code="{{{code}}}"
+                {{#if cart_currency_switch_url.length '>' 0 }}
+                data-cart-currency-switch-url="{{{cart_currency_switch_url}}}"
+                {{/if}}
+                data-warning="{{lang 'common.currency_switch_promotion'}}"
+            >
+            {{#if is_active}}
+                <strong>{{name}}</strong>
+            {{else}}
+                {{name}}
+            {{/if}}
+            </a>
+        </li>
+        {{/each}}
+    </ul>
+</li>
+{{/if}}

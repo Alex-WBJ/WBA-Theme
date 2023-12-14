@@ -1,0 +1,184 @@
+// Initial load styles
+html {
+    font-size: 13px;
+}
+body {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.is-srOnly {
+    border: 0 !important;
+    clip: rect(1px, 1px, 1px, 1px) !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
+}
+
+.checkoutHeader {
+    background-color: #292A2D !important;
+    border-color: #171718 !important;
+}
+
+.checkoutHeader-content {
+    margin: 0 auto;
+    max-width: 92.30769rem;
+    padding: 1.5rem;
+    width: 100%;
+
+    @media (min-width: 551px) {
+        padding: 3rem;
+    }
+
+}
+
+.checkoutHeader-heading {
+    margin: 0;
+}
+// 
+
+#checkout-app {
+    flex-grow: 1;
+}
+
+.cart-header-link {
+    text-decoration: underline;
+}
+
+.customerEmail-body {
+    margin-top: 2px;
+    
+    [for="shouldSubscribe"] {
+        font-size: 14px;
+        font-weight: 500;
+    }
+}
+
+.customerEmail-action {
+    @media (min-width: 551px) {
+        margin-top: 2.22rem;
+    }
+}
+
+.stepHeader-counter--complete {
+    transform: none;
+}
+
+.stepHeader {
+    .optimizedCheckout-step  {
+        background-color: #292A2D;
+    }
+
+    h2 {
+        text-transform: uppercase;
+        font-size: remCalc(24);
+    }
+}
+
+.layout-cart {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.checkout-steps, .optimizedCheckout-orderSummary {
+    p,
+    h2,
+    h3,
+    h4,
+    span,
+    div,
+    label {
+        color: #171718;
+    }
+
+    #checkout-customer-continue {
+        background-color: #21AC79;
+        border-color: unset;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    #email-label {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: bold;
+    }
+
+    [for="shouldSubscribe"], p {
+        color: #171718;
+        font-family: 'Franklin Gothic', sans-serif;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .optimizedCheckout-headingSecondary {
+        font-size: 24px;
+        color: #171718;
+    }
+
+    .cart-header-link, .redeemable-label {
+        font-weight: bold;
+        font-size: 14px;
+        color: #2172AC;
+    }
+
+    .redeemable-label {
+        text-decoration: underline;
+    }
+
+    .optimizedCheckout-contentPrimary {
+        font-size: 14px;
+    }
+
+    .product-price {
+        font-size: 12px;
+    }
+
+    .cart-priceItem--total {
+        .cart-priceItem-value {
+            > span {
+                font-size: 24px;
+            }
+        }
+
+        .cart-priceItem-label {
+            > span {
+                font-size: 14px;
+            }
+        }
+    }
+
+    #checkout-customer-login {
+        color: #171718;
+        font-weight: bold;
+    }
+}
+
+#checkout-app {
+    .layout {
+    @media (min-width: 1200px) {
+            max-width: unset;
+            padding: 0 13rem 7.5rem;
+
+            .layout-cart {
+                width: 30%;
+            }
+        }
+    }
+}
+
+.checkoutHeader-content {
+    @media (min-width: 1200px) {
+        max-width: unset;
+        padding-left: 13rem;
+        padding-right: 13rem;
+    }
+}
+
+
+[data-test="checkout-shipping-comments"] {
+    display: none;
+}

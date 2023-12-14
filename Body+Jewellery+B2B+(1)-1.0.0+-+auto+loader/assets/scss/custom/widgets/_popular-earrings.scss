@@ -1,0 +1,255 @@
+.popular-earrings {
+    border-top: 1px solid #D6DBE2;
+    border-bottom: 1px solid #D6DBE2;
+    margin: 4px remCalc(-21px);
+    position: relative;
+
+    &::after {
+        background-color: rgba(255, 255, 255, 0.2);
+        opacity: 0;
+        content: '';
+        position: absolute;
+        transition: opacity 0.4s;
+    }
+
+    &.--is-loading {
+        pointer-events: none;
+
+        &::after {
+            inset: 0;
+            opacity: 1;
+        }
+    }
+
+    > .grid-layout {
+        min-height: 35vw;
+
+        @include breakpoint("xlarge") {
+            min-height: 680px;
+        }
+    }
+
+    [data-overlay-wrapper] + & {
+        // Editor only
+        min-height: 700px;
+
+        > .grid-layout {
+            min-height: 700px;
+        }
+    }
+
+    @include breakpoint("small") {
+        margin-left: remCalc(-32px);
+        margin-right: remCalc(-32px);
+    }
+
+    @include breakpoint("medium") {
+        margin: 0 calc(50% - 50vw);
+    }
+
+    .grid {
+        @include breakpoint("large") {
+            min-height: 692px;
+        }
+    }
+
+    .carousel-slider {
+        @include breakpoint("medium") {
+            padding: 0 20px;
+        }
+
+        &.--title {
+            padding: 20px;
+
+            @include -breakpoint("medium") {
+                border-bottom: 1px solid #D6DBE2;
+            }
+
+            @include breakpoint("medium") {
+                padding: 20px 20px 0;
+            }
+
+            @include breakpoint("large") {
+                padding: 60px 30px 0;
+            }
+        }
+
+        h2 {
+            font-size: remCalc(16px);
+
+            @include breakpoint("medium") {
+                font-size: remCalc(20px);
+            }
+
+            @include breakpoint("large") {
+                font-size: remCalc(32px);
+            }
+        }
+
+        .carousel-slider_body {
+            margin-left: 0;
+            margin-right: 0;
+            position: relative;
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                width: 10px;
+                height: 100%;
+                z-index: 1;
+
+                @include breakpoint("medium") {
+                    width: 18px;
+                }
+            }
+
+            &::before {
+                background-image: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+                left: 0;
+
+                @include breakpoint("medium") {
+                    left: -18px;
+                }
+            }
+
+            &::after {
+                background-image: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+                right: 0;
+
+                @include breakpoint("medium") {
+                    right: -18px;
+                }
+            }
+        }
+
+        .card {
+            margin: 0;
+            padding: 10px;
+        }
+
+        .card-product .card-body {
+            @include -breakpoint("medium") {
+                padding: 0;
+            }
+        }
+    }
+
+    .carousel-slider_carousel {
+        @include -breakpoint("medium") {
+            margin-left: 0;
+            margin-right: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        &:not(.slick-initialized) {
+            display: flex;
+
+            li {
+                @include -breakpoint("medium") {
+                    flex-basis: 100%;
+                    &:nth-child(1) {
+                        ~ li {
+                            display: none;
+                        }
+                    }
+                }
+
+                @include breakpoint("medium") {
+                    flex-basis: 50%;
+                    &:nth-child(2) {
+                        ~ li {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.popular-earrings_frame {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.popular-earrings_hotspots {
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+
+    img {
+        display: block;
+        width: auto;
+        max-width: none;
+        max-height: 100%;
+
+        @include breakpoint("medium") {
+            width: auto;
+            height: auto;
+            min-height: 100%;
+        }
+    }
+
+    button {
+        --active-width: 50vw;
+
+        background-color: rgba(23, 23, 24, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        padding: 0;
+        position: absolute;
+        width: 23px;
+        height: 23px;
+
+        top: 50%;
+        left: 50%;
+
+        &[data-loaditems] {
+            display: none;
+        }
+        
+        &::before {
+            background-color: #fff;
+            border-radius: 50%;
+            content: '';
+            display: block;
+            margin: auto;
+            width: 5px;
+            height: 5px;
+        }
+
+        &::after {
+            background-color: #fff;
+            position: absolute;
+            content: '';
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            opacity: 0;
+            transition: color 0.4s, width 1s, opacity 0.4s;
+        }
+
+        &.--active {
+            border-color: rgba(205, 73, 124, 0.8);
+            z-index: 1;
+
+            &::before {
+                background-color: #CD497C;
+            }
+
+            &::after {
+                background-color: #CD497C;
+                opacity: 1;
+                width: var(--active-width);
+            }
+        }
+    }
+}

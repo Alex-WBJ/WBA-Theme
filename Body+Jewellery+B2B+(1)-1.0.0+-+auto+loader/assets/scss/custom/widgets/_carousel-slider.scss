@@ -1,0 +1,259 @@
+.carousel-slider {
+    h2 {
+        font-size: remCalc(16px);
+        font-weight: 600;
+        margin: 0;
+        text-transform: uppercase;
+
+        @include breakpoint("medium") {
+            font-size: remCalc(20px);
+        }
+    }
+
+    h3 {
+        font-size: remCalc(14px);
+        font-weight: 500;
+        margin: 26px 0 0;
+        text-transform: uppercase;
+    }
+
+    .carousel-slider_carousel,
+    .carousel-slider_item {
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+
+    .carousel-slider_carousel {
+        list-style: none;
+    }
+
+    .carousel-slider_top {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .carousel-slider_controls {
+        align-items: center;
+        display: flex;
+        gap: 4px;
+    }
+
+    .carousel-slider_body {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    .carousel-slider_item_link {
+        display: block;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+
+        h3 {
+            font-weight: bold;
+        }
+    }
+
+    // Slick elements
+    .slick-arrow {
+        background-color: #292A2D;
+        background-position: center center;
+        background-repeat: no-repeat;
+        border: none;
+        margin: 0;
+        position: static;
+        transform: none;
+        width: 40px;
+        height: 40px;
+
+        @include -breakpoint("medium") {
+            height: 30px;
+            width: 30px;
+        }
+
+        &::before {
+            content: unset;
+        }
+
+        &,
+        &:hover,
+        &:focus {
+            background-size: auto;
+
+
+            @include -breakpoint("medium") {
+                background-size: 8px auto;
+            }
+        }
+    }
+
+    .slick-prev {
+        background-image: url('../img/icons/white/carousel-prev.svg');
+    }
+
+    .slick-next {
+        background-image: url('../img/icons/white/carousel-next.svg');
+    }
+
+    &[data-category-slick] {
+        margin-bottom: 20px;
+
+        .carousel-slider_body {
+            @media (max-width: 700px) {
+                margin-left: remCalc(-32px);
+                margin-right: remCalc(-32px);
+                position: relative;
+                overflow: hidden;
+                padding-right: 20vw;
+            }
+
+            @include -breakpoint("small") {
+                margin-left: remCalc(-21px);
+                margin-right: remCalc(-21px);
+            }
+        }
+
+        .slick-list {
+            @media (max-width: 700px) {
+                overflow: visible;
+            }
+        }
+
+        .slick-slide {
+            @media (max-width: 700px) {
+                opacity: 1;
+                transition: opacity 0.4s;
+
+                &:not(.slick-active) {
+                    opacity: 0.5;
+                }
+            }
+        }
+
+        .carousel-slider_carousel {
+            &:not(.slick-initialized) {
+                display: flex;
+
+                li {
+                    flex-basis: 33.333%;
+
+                    &:nth-child(3) {
+                        ~ li {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &[data-product-slick] {
+        margin: 24px 0;
+
+        @include breakpoint("medium") {
+            margin: 36px 0;
+        }
+
+        h2 {
+            font-size: remCalc(16px);
+
+            @include breakpoint("medium") {
+                font-size: remCalc(32px);
+            }
+        }
+
+        .carousel-slider_body {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+}
+
+// Generic Product Slider Updates
+[data-product-slick],
+[data-ambassador-slick],
+[data-popular-earrings-slick],
+[data-popular-widget-slick] {
+    .carousel-slider_carousel {
+        margin-left: -18px;
+        margin-right: -18px;
+        overflow: hidden;
+        padding-left: 18px;
+        padding-right: 18px;
+        position: relative;
+        width: auto;
+    }
+
+    .slick-list {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        overflow: visible;
+    }
+
+    .slick-track {
+        align-items: stretch;
+        display: flex;
+    }
+
+    .slick-slide {
+        flex-grow: 0;
+        flex-shrink: 0;
+        height: auto;
+        padding: 0;
+    }
+
+    .slick-slide,
+    .card-product,
+    .card-body {
+        align-items: stretch;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .card-body {
+        flex-grow: 1;
+    }
+}
+
+[data-ambassador-slick] {
+    .carousel-slider_carousel {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .slick-list {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+[data-popular-earrings-slick],
+[data-popular-widget-slick] {
+    .slick-list {
+        padding-bottom: 0;
+        padding-top: 0;
+
+        @include -breakpoint("medium") {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    }
+}
+
+[data-product-slick] {
+    .carousel-slider_carousel {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .slick-list {
+        overflow: hidden;
+    }
+}

@@ -1,0 +1,61 @@
+.button {
+    border-radius: 0;
+}
+
+
+
+.button--checkout,
+.button--basket {
+    align-items: center;
+    border-width: 0;
+    border-radius: 0;
+    color: #fff;
+    display: flex;
+    font-size: remCalc(18px);
+    font-weight: 700;
+    line-height: 1;
+    padding: 12px 20px;
+    text-align: center;
+    text-transform: uppercase;
+
+    @include breakpoint("medium") {
+        font-size: remCalc(20px);
+        padding: 22px 40px;
+    }
+
+    span {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &:active {
+        border-width: 0;
+    }
+}
+
+.button--checkout {
+    background-color: var(--colour-green);
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: var(--colour-green);
+
+        path {
+            stroke: var(--colour-green);
+        }
+    }
+}
+.button--basket {
+    background-color: #171718;
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: #171718;
+
+        path {
+            stroke: #171718;
+        }
+    }
+}

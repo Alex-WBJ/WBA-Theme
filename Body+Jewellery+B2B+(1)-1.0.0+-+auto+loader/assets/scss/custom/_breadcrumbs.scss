@@ -1,0 +1,32 @@
+ol.breadcrumbs {
+    background-color: #171718;
+    color: #fff;
+    font-size: remCalc(12px);
+    font-weight: 500;
+    margin: 0;
+    padding: 8px 21px;
+    text-align: left;
+
+    a {
+        color: #9CA6A8;
+        text-decoration: none;
+    }
+
+    .breadcrumb {
+        &.is-active {
+            a {
+                color: #fff;
+            }
+        }
+
+        &:not(:first-child){
+            &::before {
+                border: none;
+                content: '>';
+                height: auto;
+                top: 0;
+                transform: none;
+            }
+        }
+    }
+}

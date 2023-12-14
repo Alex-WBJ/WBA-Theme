@@ -1,0 +1,70 @@
+@import "header/top-bar";
+@import "header/nav-pages";
+@import "header/nav-user";
+@import "header/landing-signposts";
+@import "header/quick-search";
+@import "header/benefits-bar";
+@import "header/minicart";
+@import "header/most-popular";
+
+.header {
+    background-color: #292A2D;
+    height: auto;
+
+    &.is-open {
+        height: auto;
+    }
+
+    .mobileMenu-toggle {
+        border: 1px solid #80868F;
+        width: 41px;
+        height: 41px;
+        padding: 0;
+        top: 7px;
+        left: 7px;
+
+        .mobileMenu-toggleIcon {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            &,
+            &::before,
+            &::after {
+                background-color: #fff;
+            }
+        }
+    }
+}
+
+.header-inner {
+    @include breakpoint("medium") {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        padding: 10px;
+    }
+}
+
+.header-logo {
+    @include breakpoint("medium") {
+        margin: 0;
+        flex-basis: 100px;
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+    @include breakpoint("large") {
+        flex-basis: 137px;
+    }
+}
+
+.lowerIdx {
+    z-index: auto;
+}
+
+.header-logo-image-container {
+    @include breakpoint("medium") {
+        min-height: 0;
+    }
+}

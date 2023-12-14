@@ -1,0 +1,19 @@
+<ul class="tabs" data-tab role="tablist">
+    {{#if product.related_products}}
+        <li class="tab is-active" role="presentation">
+            <a class="tab-title" href="#tab-related" role="tab" tabindex="0" aria-selected="true" controls="tab-related">{{lang 'products.related_products'}}</a>
+        </li>
+    {{/if}}
+</ul>
+
+<div class="tabs-contents">
+{{#if product.related_products}}
+    <div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent is-active" id="tab-related">
+        {{#if settings.data_tag_enabled}}
+            {{> components/products/carousel products=product.related_products columns=6 list="Related Products"}}
+        {{else}}
+            {{> components/products/carousel products=product.related_products columns=6}}
+        {{/if}}
+    </div>
+{{/if}}
+</div>

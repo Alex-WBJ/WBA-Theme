@@ -1,0 +1,113 @@
+
+.variant-tattoo-grid {
+    --grid-header-size: 36px;
+    border-right: 1px solid #D6DBE2;
+    display: grid;
+    grid-template-columns: var(--grid-header-size) var(--grid-header-size) repeat(var(--variant-columns), 1fr);
+
+    @include breakpoint("large") {
+        --grid-header-size: 46px;
+    }
+
+    &.--header {
+        border-right-color: #000;
+        grid-template-rows: var(--grid-header-size) var(--grid-header-size);
+    }
+
+    .variant-tattoo-grid_header {
+        background-color: #000;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        font-size: remCalc(12px);
+        font-weight: 600;
+        justify-content: center;
+        text-transform: uppercase;
+
+        @include breakpoint("medium") {
+            font-size: remCalc(14px);
+        }
+    }
+
+    .variant-tattoo-grid_spacer {
+        border-bottom: 1px solid #90959D;
+        grid-column: span 2 / span 2;
+        grid-row: span 2 / span 2;
+    }
+
+    .variant-tattoo-grid_top-title {
+        border-bottom: 1px solid #90959D;
+        border-left: 1px solid #90959D;
+        grid-column: span var(--variant-columns) / span var(--variant-columns);
+    }
+
+    .variant-tattoo-grid_top-column {
+        border-left: 1px solid #90959D;
+    }
+
+    .variant-tattoo-grid_side-title {
+        border-right: 1px solid #90959D;
+        grid-column: 1;
+        grid-row: span var(--variant-rows) / span var(--variant-rows);
+        position: relative;
+
+        span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-90deg);
+            transform-origin: center;
+            white-space: nowrap;
+        }
+    }
+
+    .variant-tattoo-grid_side-column {
+        border-bottom: 1px solid #90959D;
+        grid-column: 2;
+    }
+
+    .variant-tattoo-grid_item {
+        border-bottom: 1px solid #D6DBE2;
+        border-left: 1px solid #D6DBE2;
+        background-color: #fff;
+
+        &.--no-stock {
+            .variant-tattoo-grid_item-qty {
+                display: none;
+            }
+        }
+
+        &:not(.--no-stock) {
+            .variant-tattoo-grid_item-stock {
+                display: none;
+            }
+        }
+
+        &.--even {
+            background-color: #F2F6FB;
+        }
+    }
+    .variant-tattoo-grid_item-qty {
+        input {
+            background-color: inherit;
+            border: none;
+            padding: 14px;
+            text-align: center;
+            width: 100%;
+        }
+    }
+    .variant-tattoo-grid_item-stock {
+        font-size: remCalc(12px);
+        font-weight: 600;
+        padding: 13px 0;
+        text-align: center;
+    }
+    .variant-tattoo-grid_item-sku {
+        border-top: 1px solid #D6DBE2;
+        color: #90959D;
+        font-size: remCalc(14px);
+        line-height: 1;
+        padding: 7px;
+        text-align: center;
+    }
+}

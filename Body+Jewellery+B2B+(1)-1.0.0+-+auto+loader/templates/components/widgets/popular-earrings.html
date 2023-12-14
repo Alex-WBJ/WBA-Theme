@@ -1,0 +1,42 @@
+<div class="popular-earrings" data-popular-earrings-slick>
+    <div class="grid-layout --gap-0">
+        <div class="col-12 col-m-6 order-m-2">
+            <div class="carousel-slider --title">
+                <div class="carousel-slider_top">
+                    <h2>Popular Helix Items</h2>
+                    <div class="carousel-slider_controls"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 row-span-2 order-m-1">
+            <div class="popular-earrings_frame">
+                <div class="popular-earrings_hotspots">
+                    <img src="{{cdn 'img/home/ear.jpg'}}" alt="">
+                    <button class="--active" data-goto="0" type="button" style="left: 35.972%; top: 26.053%;"></button>
+                    <button data-goto="2" type="button" style="left: 48.888%; top: 22.222%;"></button>
+                    <button data-goto="4" type="button" style="left: 58.75%; top: 26.053%;"></button>
+                    <button data-goto="6" type="button" style="left: 45.972%; top: 28.735%;"></button>
+                    <button data-goto="8" type="button" style="left: 39.166%; top: 34.865%;"></button>
+                    <button data-goto="10" type="button" style="left: 29.305%; top: 41.123%;"></button>
+                    <button data-goto="12" type="button" style="left: 51.805%; top: 45.593%;"></button>
+                    <button data-goto="14" type="button" style="left: 34.583%; top: 50.319%;"></button>
+                    <button data-goto="16" type="button" style="left: 39.861%; top: 52.362%;"></button>
+                    <button data-goto="18" type="button" style="left: 32.916%; top: 56.960%;"></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 order-m-2">
+            <div class="carousel-slider">                
+                <div class="carousel-slider_body">
+                    <ul class="carousel-slider_carousel">
+                        {{#each products.new}}
+                        <li class="carousel-slider_item">
+                            {{> components/products/card settings=../settings theme_settings=../theme_settings customer=../customer event="list" position=(add @index 1)}}
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

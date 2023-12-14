@@ -1,0 +1,19 @@
+<div class="carousel-slider" data-product-slick="{{columns}}">
+    <div class="carousel-slider_top">
+        <h2>{{title}}</h2>
+
+        <div class="carousel-slider_controls"></div>
+    </div>
+
+    <div class="carousel-slider_body">
+        <section class="carousel-slider_carousel productCarousel"
+            data-list-name="{{list}}"
+        >
+            {{#each products}}
+            <div data-product-slide class="productCarousel-slide">
+                {{> components/products/card settings=../settings theme_settings=../theme_settings customer=../customer event="list" position=(add @index 1)}}
+            </div>
+            {{/each}}
+        </section>
+    </div>
+</div>

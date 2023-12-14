@@ -1,0 +1,148 @@
+{{#if children}}
+<a class="navPages-action has-subMenu{{#if is_active}} activePage{{/if}}"
+   href="{{url}}"
+   data-navid="navPages-{{id}}"
+>
+    <span class="navPages-action-text">{{name}}</span>
+    <i class="icon navPages-action-moreIcon" aria-hidden="true">
+        <svg class="icon-toggle"><use xlink:href="#icon-chevron-down" /></svg>
+    </i>
+</a>
+<div class="navPage-subMenu" id="navPages-{{id}}" aria-hidden="true" tabindex="-1">
+    <div class="navPages-title--mobile"
+         data-navid="navPages-{{id}}">
+        <i class="icon" aria-hidden="true">
+            <svg><use xlink:href="#icon-chevron-left" /></svg>
+        </i>
+        <span>{{name}}</span>
+    </div>
+
+    <ul class="navPage-subMenu-list">
+        <li class="navPage-subMenu-item --all">
+            <a class="navPage-subMenu-action navPages-action"
+               href="{{url}}"
+               aria-label="{{lang 'category.view_all.name' category=name}}"
+            >
+                {{lang 'category.view_all.name' category=name}}
+            </a>
+        </li>
+        {{#each children}}
+            <li class="navPage-subMenu-item">
+                {{#if children}}
+                    <a class="navPage-subMenu-action navPages-action has-subMenu{{#if is_active}} activePage{{/if}}"
+                       href="{{url}}"
+                       aria-label="{{name}}"
+                       data-navid="navPages-{{id}}"
+                    >
+                        <span class="navPages-action-text">{{name}}</span>
+                        <span class="collapsible-icon-wrapper"
+                            data-navid="navPages-{{id}}"
+                            data-navid-disabled-breakpoint="medium"
+                            data-navid-disabled-state="open"
+                            data-navid-enabled-state="closed"
+                        >
+                            <i class="icon navPages-action-moreIcon" aria-hidden="true">
+                                <svg class="icon-toggle"><use xlink:href="#icon-chevron-down" /></svg>
+                            </i>
+                        </span>
+                    </a>
+                    <div class="navPage-subMenu" id="navPages-{{id}}" aria-hidden="true" tabindex="-1">
+                        <div class="navPages-title--mobile"
+                             data-navid="navPages-{{id}}">
+                            <i class="icon" aria-hidden="true">
+                                <svg><use xlink:href="#icon-chevron-left" /></svg>
+                            </i>
+                            <span>{{name}}</span>
+                        </div>
+
+                        <ul class="navPage-childList" id="navPages-{{id}}">
+                            {{#each children}}
+                            <li class="navPage-childList-item"
+                                {{#if children}}
+                                    data-child-id="{{id}}" 
+                                    data-child-data="{{json children}}" 
+                                    data-category-title="{{./name}}"
+                                    data-category-url="{{./url}}"
+                                {{/if}} 
+                                data-depth="1"
+                            >
+                                <a class="navPage-childList-action navPages-action{{#if is_active}} activePage{{/if}} {{#if children}}has-subMenu{{/if}}"
+                                href="{{url}}"
+                                aria-label="{{name}}"
+                                data-navid="navPages-{{./id}}"
+                                >
+                                    <span class="navPages-action-text">{{name}}</span>
+                                    <span class="collapsible-icon-wrapper"
+                                        data-navid="navPages-{{./id}}"
+                                        data-navid-disabled-breakpoint="medium"
+                                        data-navid-disabled-state="open"
+                                        data-navid-enabled-state="closed"
+                                    >
+                                    {{#if children}}
+                                        <i class="icon navPages-action-moreIcon" aria-hidden="true">
+                                            <svg class="icon-toggle"><use xlink:href="#icon-chevron-down" /></svg>
+                                        </i>
+                                    {{/if}}
+                                </a>
+                                {{#if children}}
+                                    <div class="navPage-subMenu" id="navPages-{{./id}}" aria-hidden="true" tabindex="-1">
+                                        <div class="navPages-title--mobile"
+                                            data-navid="navPages-{{./id}}">
+                                            <i class="icon" aria-hidden="true">
+                                                <svg><use xlink:href="#icon-chevron-left" /></svg>
+                                            </i>
+                                            <span>{{name}}</span>
+                                        </div>
+
+                                        <ul class="navPage-childList navPage-childList-subMenu" id="navPages-{{id}}" data-depth="2">
+                                            {{#each children}}
+                                                <li class="navPage-childList-item">
+                                                    <a class="navPage-childList-action navPages-action{{#if is_active}} activePage{{/if}}"
+                                                    href="{{url}}"
+                                                    aria-label="{{name}}"
+                                                    >
+                                                        {{name}}
+                                                    </a>
+                                                </li>
+                                            {{/each}}
+                                        </ul>
+                                    </div>
+                                {{/if}}
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                {{else}}
+                    <a class="navPage-subMenu-action navPages-action{{#if is_active}} activePage{{/if}}"
+                       href="{{url}}"
+                       aria-label="{{name}}"
+                    >
+                        {{name}}
+                    </a>
+                {{/if}}
+            </li>
+        {{/each}}
+    </ul>
+
+    <div data-expanding-menu="{{id}}"></div>
+
+    <div class="navPage-popular">
+        <div class="wrap hidden">
+            <h2>Most Popular</h2>
+
+            <div class="navPage-popular-listing" data-popular-products></div>
+            
+        </div>
+    </div>
+</div>
+{{else}}
+  {{#or (if name '===' "Top Sellers")}}
+    {{else}}
+        <a class="navPages-action{{#if is_active}} activePage{{/if}}"
+        href="{{url}}"
+        aria-label="{{name}}"
+        >
+            <span class="navPages-action-text">{{name}}</span>
+        </a>
+    {{/or}}
+{{/if}}

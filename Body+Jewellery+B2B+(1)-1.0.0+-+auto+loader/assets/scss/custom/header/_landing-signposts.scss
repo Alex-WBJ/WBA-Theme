@@ -1,0 +1,67 @@
+.landing-signposts {
+    align-items: stretch;
+    display: flex;
+
+    @include -breakpoint("medium") {
+        display: none;
+    }
+
+    a {
+        color: #fff;
+        font-size: remCalc(16px);
+        font-weight: 700;
+        line-height: 1;
+        text-decoration: none;
+        text-transform: uppercase;
+        text-align: center;
+        width: 100px;
+        padding: 14px 0;
+        position: relative;
+
+        @include breakpoint("large") {
+            width: 126px;
+        }
+
+        &:hover, &:active {
+            &::before {
+                content: '';
+                height: remCalc(70);
+                width: 100%;
+                display: block;
+                position: absolute;
+                top: -10px;
+                left: 0;
+                background: #171718;
+                z-index: -1;
+            }
+        }
+    }
+
+    &.tattoo {
+        a:first-child::before {
+            content: '';
+            height: remCalc(70);
+            width: 100%;
+            display: block;
+            position: absolute;
+            top: -10px;
+            left: 0;
+            background: #171718;
+            z-index: -1;
+        }
+    }
+
+    &.jewellery {
+        a:last-child:before {
+            content: '';
+            height: remCalc(70);
+            width: 100%;
+            display: block;
+            position: absolute;
+            top: -10px;
+            left: 0;
+            background: #171718;
+            z-index: -1;
+        }
+    }
+}

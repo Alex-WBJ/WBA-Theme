@@ -1,0 +1,62 @@
+.grid-layout {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.--gap-0 {
+    gap: 0;
+}
+.--gap-small {
+    gap: 4px;
+}
+
+@for $i from 1 through 12 {
+    .col-#{$i} {
+        grid-column: span #{$i} / span #{$i};
+    }
+}
+
+@include breakpoint("medium") {
+    @for $i from 1 through 12 {
+        .col-m-#{$i} {
+            grid-column: span #{$i} / span #{$i};
+        }
+    }
+}
+
+@include breakpoint("large") {
+    @for $i from 1 through 12 {
+        .col-l-#{$i} {
+            grid-column: span #{$i} / span #{$i};
+        }
+    }
+}
+
+@include breakpoint("xlarge") {
+    @for $i from 1 through 12 {
+        .col-xl-#{$i} {
+            grid-column: span #{$i} / span #{$i};
+        }
+    }
+}
+
+@for $i from 1 through 6 {
+    .row-span-#{$i} {
+        grid-row: span #{$i} / span #{$i};
+    }
+}
+
+@for $i from 1 through 6 {
+    .order-#{$i} {
+        order: #{$i};
+    }
+}
+
+@include breakpoint("medium") {
+    @for $i from 1 through 6 {
+        .order-m-#{$i} {
+            order: #{$i};
+        }
+    }
+}

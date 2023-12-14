@@ -1,0 +1,19 @@
+.product-listing-full,
+.product-listing-centred {
+    margin-top: 4px;
+    padding-bottom: 4px;
+
+    .carousel-slider_top{
+        margin: 0 5rem;
+        
+        @include -breakpoint("medium") {
+            margin: 0 1rem;
+        }
+    }
+}
+
+.product-listing-full {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+}

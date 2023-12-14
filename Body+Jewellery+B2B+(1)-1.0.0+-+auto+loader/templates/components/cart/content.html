@@ -1,0 +1,167 @@
+<table class="cart" data-cart-quantity="{{cart.quantity}}">
+    <thead class="cart-header">
+        <tr>
+            <th class="cart-header-item cart-header-item" colspan="2">{{#gt cart.items.length 1}}Items{{else}}{{lang 'cart.checkout.item'}}{{/gt}}</th>
+            <th class="cart-header-item cart-header-quantity">{{lang 'cart.checkout.quantity'}}</th>
+            <th class="cart-header-item">{{lang 'cart.checkout.price'}}</th>
+        </tr>
+    </thead>
+    <tbody class="cart-list">
+        {{#each cart.items}}
+            <tr class="cart-item"
+                data-item-row data-item-id="{{id}}"
+                data-item-product="{{product_id}}"
+                data-name="{{name}}">
+                <td class="cart-item-block cart-item-figure">
+                    {{#if type '==' 'GiftCertificate'}}
+                        <img
+                            class="cart-item-fixed-image"
+                            src="{{cdn ../theme_settings.default_image_gift_certificate}}"
+                            alt="{{lang 'cart.gift_certificates.gift_certificate'}}"
+                            title="{{lang 'cart.gift_certificates.gift_certificate'}}"
+                        >
+                    {{else}}
+                        {{> components/common/responsive-img
+                            image=image
+                            class="cart-item-image"
+                            fallback_size=../theme_settings.productthumb_size
+                            lazyload="lazyload"
+                            default_image=../theme_settings.default_image_product
+                        }}
+                    {{/if}}
+                </td>
+                <td class="cart-item-block cart-item-title">
+                    {{#if brand.name}}
+                        <p class="cart-item-brand">{{brand.name}}</p>
+                    {{/if}}
+                    <h2 class="cart-item-name">
+                        <a class="cart-item-name__label" href="{{url}}">{{name}}</a>
+                    </h2>
+
+                    {{#if sku}}
+                        <div class="cart-item-sku">SKU <span>{{sku}}</span></div>
+                    {{/if}}
+
+                    {{#if release_date}}
+                        <p>({{release_date}})</p>
+                    {{/if}}
+
+                    {{#if options}}
+                        <dl class="definitionList">
+                            {{#each options}}
+                                <dt class="definitionList-key" data-option-name="{{name}}" data-option-value="{{value}}">{{name}}</dt>
+                                <dd class="definitionList-value">
+                                    {{#if is_file}}
+                                        <a href="/viewfile.php?attributeId={{id}}&cartitem={{../id}}">{{value}}</a>
+                                    {{else}}
+                                        {{> components/common/product-options}}
+                                    {{/if}}
+                                </dd>
+                            {{/each}}
+                        </dl>
+                    {{/if}}
+
+                    {{#if type '==' 'GiftCertificate'}}
+                        <a href="{{edit_url}}"
+                           aria-label="{{lang 'cart.gift_certificates.change_gift_certificate' certificate_name=name}}"
+                        >
+                            {{lang 'common.change'}}
+                        </a>
+                    {{/if}}
+                    {{> components/cart/item-giftwrap this}}
+                    {{#if event_date}}
+                        <dl class="cart-item-options">
+                            <dt class="cart-item-option-title">
+                                {{event_date.name}}
+                            </dt>
+
+                            <dd class="cart-item-option-description">
+                                {{event_date.date}}
+                            </dd>
+                        </dl>
+                    {{/if}}
+
+                </td>
+
+                <td class="cart-item-block cart-item-info cart-item-quantity">
+                    <label class="form-label cart-item-label" for="qty-{{id}}">{{lang 'products.quantity'}}</label>
+
+                    <div class="cart-item-quantity-actions">
+                        <div class="form-increment">
+                            <div class="field-group">
+                            {{#if can_modify}}
+                                <button class="qty-button"
+                                        data-cart-update
+                                        data-cart-itemid="{{id}}"
+                                        data-action="dec"
+                                >
+                                    <span class="is-srOnly">{{lang 'products.quantity_decrease' name=name}}</span>
+                                    <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 2L5.5 6L9 2" stroke="#171718" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            {{/if}}
+                            <input class="form-input form-input--incrementTotal cart-item-qty-input"
+                                id="qty-{{id}}"
+                                name="qty-{{id}}"
+                                type="tel"
+                                value="{{quantity}}"
+                                data-quantity-min="{{min_purchase_quantity}}"
+                                data-quantity-max="{{max_purchase_quantity}}"
+                                data-quantity-min-error="{{lang 'products.quantity_min' quantity=min_purchase_quantity}}"
+                                data-quantity-max-error="{{lang 'products.quantity_max' quantity=max_purchase_quantity}}"
+                                min="1"
+                                pattern="[0-9]*"
+                                data-cart-itemid="{{id}}"
+                                data-action="manualQtyChange"
+                                aria-label="{{name}}"
+                                aria-live="polite"{{#unless can_modify}} disabled{{/unless}}>
+                            {{#if can_modify}}
+                                <button class="qty-button"
+                                        data-cart-update
+                                        data-cart-itemid="{{id}}"
+                                        data-action="inc"
+                                >
+                                    <span class="is-srOnly">{{lang 'products.quantity_increase' name=name}}</span>
+                                    <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 5L5.5 1L2 5" stroke="#171718" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            {{/if}}
+                            </div>
+                        </div>
+
+                        <a
+                            href="#"
+                            class="cart-item-remove"
+                            data-cart-itemid="{{id}}"
+                            data-confirm-delete="{{lang 'cart.confirm_delete'}}"
+                            aria-label="{{lang 'cart.remove_item' name=name}}"
+                        >                                    
+                            <svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 4.8H2.88889M2.88889 4.8H18M2.88889 4.8V18.1C2.88889 18.6039 3.0879 19.0872 3.44213 19.4435C3.79637 19.7998 4.27681 20 4.77778 20H14.2222C14.7232 20 15.2036 19.7998 15.5579 19.4435C15.9121 19.0872 16.1111 18.6039 16.1111 18.1V4.8M5.72222 4.8V2.9C5.72222 2.39609 5.92123 1.91282 6.27547 1.5565C6.6297 1.20018 7.11015 1 7.61111 1H11.3889C11.8899 1 12.3703 1.20018 12.7245 1.5565C13.0788 1.91282 13.2778 2.39609 13.2778 2.9V4.8M7.61111 9.55V15.25M11.3889 9.55V15.25" stroke="#9CA6A8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>    
+                        </a>
+                    </div>
+                </td>
+
+                <td class="cart-item-block cart-item-info cart-item-price">
+                    <span class="cart-item-label">{{lang 'cart.checkout.price'}}</span>
+                    {{#or ../customer (if ../theme_settings.restrict_to_login '!==' true)}}
+                        <div class="cart-item-price--values">
+                            {{#if price.formatted}}
+                                <div class="cart-item-value {{#if price_discounted}}price--discounted{{/if}}">{{base_price.formatted}} <span>{{lang 'cart.price.excl_vat'}}</span></div>
+                                <div class="cart-item-value {{#if price_discounted}}price--discounted{{/if}}">{{price.formatted}} <span>{{lang 'cart.price.incl_vat'}}</span></div>
+                            {{/if}}
+                        </div>
+                        {{#if price_discounted}}
+                            <span class="cart-item-value">{{price_discounted.formatted}}</span>
+                        {{/if}}
+                    {{else}}
+                        {{> components/common/login-for-pricing}}
+                    {{/or}}
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

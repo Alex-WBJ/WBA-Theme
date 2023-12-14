@@ -1,0 +1,180 @@
+// =============================================================================
+// ACCOUNT
+// =============================================================================
+
+
+// Account layouts
+// -----------------------------------------------------------------------------
+
+.account {
+    margin-bottom: spacing("single");
+}
+
+.account--fixed {
+    @include breakpoint("medium") {
+        margin: 0 auto;
+        width: grid-calc(8, $total-columns);
+    }
+}
+
+.account--fixedSmall {
+    @include breakpoint("medium") {
+        margin: 0 auto;
+        width: grid-calc(6, $total-columns);
+    }
+}
+
+.account--fixedLarge {
+    @include breakpoint("medium") {
+        margin: 0 auto;
+        width: grid-calc(9, $total-columns);
+    }
+}
+
+.account-head {
+    margin-bottom: spacing("double");
+    text-align: center;
+
+    .alertBox {
+        padding-left: spacing("double");
+        padding-right: spacing("double");
+        text-align: left;
+    }
+}
+
+.account-body {
+    @include grid-row($behavior: "nest");
+}
+
+.account-content {
+    @include grid-column(12);
+}
+
+.account-content--fixed {
+
+    @include breakpoint("medium") {
+        width: grid-calc(8, $total-columns);
+    }
+}
+
+.account-content--fixedSmall {
+
+    @include breakpoint("medium") {
+        width: grid-calc(7, $total-columns);
+    }
+}
+
+.account-sidebar {
+    @include grid-column(12);
+
+    @include breakpoint("medium") {
+        width: grid-calc(4, $total-columns);
+
+        .account-content--fixedSmall + & {
+            float: right;
+        }
+    }
+}
+
+.page_type__account_addressbook {
+    .address {
+        margin-bottom: spacing("single");
+    }
+    .panel--address {
+        .panel-body {
+            @include breakpoint("small") {
+                padding: spacing("single") spacing("single") (spacing("double") + spacing("double")); // 3
+            }
+        }
+        .form-actions {
+            .button {
+                padding: 20px 35px;
+            }
+        }
+    }
+}
+
+.page_type__wishlist {
+    .productGrid {
+        .product {
+            overflow: hidden;
+        }
+
+        .button-add-to-cart {
+            margin-bottom: 0;
+            padding: 15px 10px;
+        }
+
+        .form {
+            padding: 0 10px;
+            margin-bottom: 0;
+            @include breakpoint("medium") {
+                padding: 0 18px;
+            }
+
+            .button {
+                width: 100%;
+                font-size: remCalc(18px);
+
+                @include breakpoint("medium") {
+                    font-size: remCalc(20px);
+                    padding: 22px 40px;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+}
+
+.page_type__account_recentitems {
+    .productGrid {
+        .product {
+            overflow: hidden;
+        }
+    }
+}
+
+.account,
+.page_type__account_orderstatus,
+.page_type__account_addressbook,
+.page_type__account_inbox {
+    .page-heading {
+        font-weight: 700;
+        text-transform: uppercase;
+
+        @include breakpoint("medium") {
+            font-size: remCalc(28px);
+        }
+    }
+
+    .navBar-item {
+        .navBar-action {
+            font-size: remCalc(16px);
+        }
+
+        &.is-active {
+            > .navBar-action {
+                color: color("greys", "darkest");
+            }
+        }
+    }
+
+    .form-label {
+        color: color("greys", "darkest");
+    }
+
+    .form-actions {
+        .button {
+            font-size: remCalc(18px);
+
+            @include breakpoint("medium") {
+                font-size: remCalc(20px);
+                padding: 22px 40px;
+                font-weight: 700;
+            }
+        }
+        .button--primary {
+            background-color: #171718;
+        }
+    }
+}

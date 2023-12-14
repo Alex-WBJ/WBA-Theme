@@ -1,0 +1,64 @@
+%mobileCloseButton {
+    background-color: #292A2D;
+    border: 1px solid #fff;
+    cursor: pointer;
+    width: 41px;
+    height: 41px;
+    padding: 0;
+    position: absolute;
+    left: -20px;
+    top: 10px;
+
+    &::before,
+    &::after {
+        background-color: #fff;
+        content: '';
+        height: 2px;
+        width: 60%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+    }
+
+    &::before {
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    @include breakpoint("medium") {
+        width: 50px;
+        height: 50px;
+        left: -25px;
+        top: 19px;
+
+        &::before,
+        &::after {
+            height: 4px;
+        }
+    }
+}
+
+%unsetClearFix {
+    &::before,
+    &::after {
+        content: unset;
+    }
+}
+
+
+
+%panel {
+    border: 1px solid #D6DBE2;
+    
+    .panel-header,
+    .panel-body {
+        background-color: transparent;
+    }
+
+    .panel-body {
+        margin-bottom: 0;
+    }
+}

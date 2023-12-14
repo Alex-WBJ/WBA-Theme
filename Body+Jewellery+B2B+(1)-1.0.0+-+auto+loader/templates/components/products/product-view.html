@@ -1,0 +1,280 @@
+<div class="productView"
+    {{#if settings.data_tag_enabled}}
+    data-event-type="product"
+    data-entity-id="{{product.id}}"
+    data-name="{{product.title}}"
+    data-product-brand="{{product.brand.name}}"
+    data-product-price="
+    {{#or customer (unless theme_settings.restrict_to_login)}}
+        {{#if product.price.with_tax}}
+            {{product.price.with_tax.value}}
+        {{else}}
+            {{product.price.without_tax.value}}
+        {{/if}}
+    {{else}}
+        {{lang 'common.login_for_pricing'}}
+    {{/or}}"
+    data-product-variant="single-product-option"{{/if}}>
+
+    {{#each product.reviews.messages}}
+        {{#if error}}
+            {{> components/common/alert/alert-error error}}
+        {{/if}}
+        {{#if success}}
+            {{> components/common/alert/alert-success success}}
+        {{/if}}
+    {{/each}}
+
+    <div class="productView-top">
+        <section class="productView-images">
+            {{!--
+                Note that these image sizes are coupled to image sizes used in /assets/js/theme/common/product-details.js
+                for variant/rule image replacement
+            --}}
+
+            <div class="productView-slider carousel-slider" data-product-gallery-slick>
+                <div class="carousel-slider_carousel">
+                    {{#each product.images}}
+                    <div class="productView-slider-image">
+                        {{> components/common/responsive-img
+                            image=this
+                            fallback_size=theme_settings.product_size
+                            lazyload=../theme_settings.lazyload_mode
+                        }}
+
+                        <div class="productView-slider-image-zoom">
+                            {{> components/common/responsive-img
+                                image=this
+                                fallback_size=theme_settings.product_size
+                                lazyload=../theme_settings.lazyload_mode
+                            }}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+
+                <div class="carousel-slider_controls"></div>
+            </div>
+        </section>
+
+        <div class="productView-detailsGroup">
+            <section class="productView-details product-data">
+                <div class="productView-product">
+                    <h1 class="productView-title">{{product.title}}</h1>
+
+                    <div class="productView-infoGrid">
+                        <div class="productView-infoGridCell --cell-sku"{{#unless product.sku}} style="display: none;"{{/unless}}>
+                        <span class="productView-label">{{lang 'products.sku'}}</span> <strong>{{product.sku}}</strong>
+                        </div>
+
+                        <div class="productView-infoGridCell --cell-reviews">
+                            <div class="productView-rating">
+                                {{#if settings.show_product_rating}}
+                                    {{> components/products/ratings rating=product.rating}}
+                                {{/if}}
+                                {{#if settings.show_product_reviews}}
+                                    <a href="{{product.url}}{{#if is_ajax}}#write_review{{/if}}"
+                                    class="productView-reviewLink productView-reviewLink--new"
+                                    {{#unless is_ajax}}data-reveal-id="modal-review-form"{{/unless}}
+                                    role="button"
+                                    >
+                                    {{lang 'products.reviews.new'}}
+                                    </a>
+                                    {{#unless is_ajax}}
+                                        {{> components/products/modals/writeReview}}
+                                    {{/unless}}
+                                {{/if}}
+                            </div>
+                        </div>
+
+                        <div class="productView-infoGridCell --cell-stock">
+                            {{#if product.out_of_stock}}
+                            <span class="productView-outStock">{{lang "products.out_of_stock"}}</span>
+                            {{else}}
+                            <span class="productView-inStock">{{lang "products.in_stock"}}</span>
+                            {{/if}}
+                        </div>
+
+                        {{#if settings.show_wishlist}}
+                            {{> components/common/wishlist-dropdown}}
+                        {{/if}}
+                    </div>
+
+                    {{#if product.brand}}
+                        <h2 class="productView-brand">
+                            <a href="{{product.brand.url}}"><span>{{product.brand.name}}</span></a>
+                        </h2>
+                    {{/if}}
+
+                    {{#if product.call_for_price}}
+                        <p class="productView-price">
+                            <span>{{product.call_for_price}}</span>
+                        </p>
+                    {{/if}}
+
+
+                    <div class="productView-price"
+                        data-product="{{product.id}}"
+                        data-product-category="{{#each product.category}}{{#if @last}}{{this}}{{else}}{{this}},{{/if}}{{/each}}">
+                        {{#unless customer}}
+                            {{> components/common/login-for-pricing}}
+                        {{/unless}}
+
+                        {{#if product.price}}
+                            {{> components/products/price price=product.price}}
+                            <select>
+                                {{#if product.price.with_tax}}
+                                <option value="">Incl. VAT</option>
+                                <option value="excl">Excl. VAT</option>
+                                {{/if}}
+                                {{#if product.price.without_tax}}
+                                <option value="">Excl. VAT</option>
+                                <option value="incl">Incl. VAT</option>
+                                {{/if}}
+                            </select>
+                        {{/if}}
+                    </div>
+
+                    {{{region name="product_below_price"}}}
+
+                    {{product.detail_messages}}
+                </div>
+            </section>
+
+            <section class="productView-details product-options">
+                <div class="productView-options">
+                    {{#if product.release_date }}
+                        <p>{{product.release_date}}</p>
+                    {{/if}}
+                    <form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
+                        data-cart-item-add>
+                        <input type="hidden" name="action" value="add">
+                        <input type="hidden" name="product_id" value="{{product.id}}"/>
+
+                        <div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
+                            <label class="form-label form-label--alternate">
+                                {{lang 'products.current_stock'}}
+                                <span data-product-stock>{{product.stock_level}}</span>
+                            </label>
+                        </div>
+
+                        {{#if type '===' 'bundle'}}
+                                <div id="variantTable" class="--loading">
+                                    <h2 class="variant-table-title">Customise your product</h2>
+                                </div>
+
+                                <button class="button button--primary" id="variants-addToCart" type="button">
+                                    <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1H4.63636L7.07273 13.1148C7.15586 13.5313 7.38355 13.9055 7.71595 14.1718C8.04835 14.4381 8.46427 14.5796 8.89091 14.5714H17.7273C18.1539 14.5796 18.5698 14.4381 18.9022 14.1718C19.2346 13.9055 19.4623 13.5313 19.5455 13.1148L21 5.52381H5.54545M9.18182 19.0952C9.18182 19.5949 8.7748 20 8.27273 20C7.77065 20 7.36364 19.5949 7.36364 19.0952C7.36364 18.5956 7.77065 18.1905 8.27273 18.1905C8.7748 18.1905 9.18182 18.5956 9.18182 19.0952ZM19.1818 19.0952C19.1818 19.5949 18.7748 20 18.2727 20C17.7707 20 17.3636 19.5949 17.3636 19.0952C17.3636 18.5956 17.7707 18.1905 18.2727 18.1905C18.7748 18.1905 19.1818 18.5956 19.1818 19.0952Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                    <span>Add All To Basket</span>
+                                </button>
+                        {{else if type '===' 'complex'}}
+                                <div style="display:none;">
+                                    {{inject 'showSwatchNames' theme_settings.show_product_swatch_names}}
+                                    {{#each product.options}}
+                                        {{{dynamicComponent 'components/products/options'}}}
+                                    {{/each}}
+                                </div>
+
+                                <div id="variantTable">
+                                    <h2 class="variant-table-title">Customise your product</h2>
+                                </div>
+
+                                <button class="button button--primary complex-goto" data-goto="0" id="complex-customiseJewellery" type="button">
+                                    <span>Customise Your Jewellery</span>
+                                </button>
+                        {{else}}
+                            <div data-product-option-change style="display:none;">
+                                {{inject 'showSwatchNames' theme_settings.show_product_swatch_names}}
+                                {{#each product.options}}
+                                    {{{dynamicComponent 'components/products/options'}}}
+                                {{/each}}
+                            </div>
+
+                            {{> components/products/add-to-cart}}
+
+                            {{#if product.out_of_stock}}
+                                {{#if product.out_of_stock_message}}
+                                    {{> components/common/alert/alert-error product.out_of_stock_message}}
+                                {{else}}
+                                    {{> components/common/alert/alert-error (lang 'products.sold_out')}}
+                                {{/if}}
+                            {{/if}}
+                        {{/if}}
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    {{#if type '===' 'complex'}}
+            <div class="complex-steps" id="complex-table"></div>
+            <div class="complex-summary --invalid" id="complex-summary">
+                <button class="complex-summary-toggle" type="button">
+                    <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 5L5.5 1L2 5" stroke="#171718" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <div class="complex-summary_options"></div>
+
+                <div class="complex-summary_subtotal">
+                    {{lang "cart.checkout.subtotal"}}
+                    <div class="complex-summary_subtotal-value" data-summary-total>
+                        £0.00
+                    </div>
+                </div>
+
+                <div class="complex-summary_qty">
+                    <input type="num" id="complex-qty" value="1" min="1" max="99">
+                </div>
+
+                <div class="complex-summary_action">
+                    <button class="button button--primary" id="complex-addToCart" type="button">
+                        <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1H4.63636L7.07273 13.1148C7.15586 13.5313 7.38355 13.9055 7.71595 14.1718C8.04835 14.4381 8.46427 14.5796 8.89091 14.5714H17.7273C18.1539 14.5796 18.5698 14.4381 18.9022 14.1718C19.2346 13.9055 19.4623 13.5313 19.5455 13.1148L21 5.52381H5.54545M9.18182 19.0952C9.18182 19.5949 8.7748 20 8.27273 20C7.77065 20 7.36364 19.5949 7.36364 19.0952C7.36364 18.5956 7.77065 18.1905 8.27273 18.1905C8.7748 18.1905 9.18182 18.5956 9.18182 19.0952ZM19.1818 19.0952C19.1818 19.5949 18.7748 20 18.2727 20C17.7707 20 17.3636 19.5949 17.3636 19.0952C17.3636 18.5956 17.7707 18.1905 18.2727 18.1905C18.7748 18.1905 19.1818 18.5956 19.1818 19.0952Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <span>Add To Basket</span>
+                    </button>
+                </div>
+            </div>
+    {{/if}}
+
+    <article class="productView-description">
+        {{#if theme_settings.show_product_details_tabs}}
+            {{> components/products/description-tabs}}
+        {{else}}
+            {{> components/products/description}}
+        {{/if}}
+    </article>
+</div>
+
+{{> components/common/same-day-dispatch}}
+
+<div id="previewModal" class="modal modal--large" data-reveal>
+    {{> components/common/modal/modal-close-btn }}
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>
+
+<div class="tooltip" id="tooltip-gauge">
+    <h2>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 10.8V8M8 5.2H8.007M15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Gauge Size
+    </h2>
+    <p>The gauge size is the circumference of the smaller bar in the middle.</p>
+</div>
+
+<script>
+    window.productPageDetails = {
+        categories: [
+            {{#each product.category}}
+                '{{this}}'{{#unless @last}},{{/unless}}
+            {{/each}}
+        ],
+        isLoggedIn: {{#if customer}}true{{else}}false{{/if}}
+    };
+</script>

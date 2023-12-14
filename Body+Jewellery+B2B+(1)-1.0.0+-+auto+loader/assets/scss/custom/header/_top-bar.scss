@@ -1,0 +1,25 @@
+.top-bar {
+    align-items: stretch;
+    background-color: #F2F6FB;
+    display: flex;
+    justify-content: flex-end;
+
+    @include -breakpoint("medium") {
+        display: none;
+    }
+
+    a {
+        align-items: center;
+        border-left: 1px solid #D6DBE2;
+        display: flex;
+        font-size: remCalc(14px);
+        line-height: 2;
+        gap: 8px;
+        padding: 0 16px;
+        text-decoration: none;
+    }
+
+    svg {
+        display: block;
+    }
+}

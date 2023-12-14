@@ -1,0 +1,13 @@
+.footer-copyright {
+    text-align: center;
+    margin-top: 20px;
+
+    @include breakpoint("medium") {
+        margin-top: 40px;
+    }
+
+    p {
+        line-height: remCalc(24px);
+        margin: 0;
+    }
+}

@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Franklin Gothic';
+    font-style: normal;
+    font-weight: normal;
+    src: url("/assets/fonts/FranklinGothic.woff") format('woff');
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    letter-spacing: normal; 
+}
+p, address{
+    font-family: 'Franklin Gothic', sans-serif !important;
+}

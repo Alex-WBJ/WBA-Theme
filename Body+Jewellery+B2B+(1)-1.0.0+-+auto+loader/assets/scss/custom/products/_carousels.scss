@@ -1,0 +1,7 @@
+.js-category-products {
+    &:not(.--show) {
+        height: 0;
+        position: relative;
+        overflow: hidden;    
+    }
+}

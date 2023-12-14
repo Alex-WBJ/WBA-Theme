@@ -1,0 +1,36 @@
+.form-increment {
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-width: 100px;
+
+    label {
+        font-size: remCalc(14px);
+    }
+
+    .field-group {
+        align-items: stretch;
+        border: 1px solid #D6DBE2;
+        display: flex;
+        margin-top: 4px;
+    }
+
+    .form-input {
+        background-color: #F0F4F8;
+        border-left: 1px solid #D6DBE2;
+        border-right: 1px solid #D6DBE2;
+        border-radius: 0;
+        flex-basis: 45px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        padding: 8px 0;
+    }
+
+    .qty-button,
+    .button {
+        border: none;
+        flex-basis: 26px;
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+}

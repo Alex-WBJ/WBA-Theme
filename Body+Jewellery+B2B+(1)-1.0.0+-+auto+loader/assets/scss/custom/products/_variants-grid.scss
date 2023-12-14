@@ -1,0 +1,162 @@
+.variant-grid {
+    &.--content {
+        font-weight: 600;
+
+        .variant-grid_row {
+            border: 1px solid #D6DBE2;
+            border-top-width: 0;
+            padding-right: 4px;
+
+            &:nth-child(even) {
+                background-color: #F2F6FB;
+            }
+
+            &.--added {
+                border-right-color: var(--colour-green);
+                border-right-width: 5px;
+                padding-right: 0;
+            }
+
+            &.--out-of-stock {
+                background-color: #FEE;
+                border-right-color: var(--colour-red);
+                border-right-width: 5px;
+                padding-right: 0;
+                position: relative;
+
+                .variant-grid_cell {
+                    opacity: 0.5;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+
+    .variant-grid_row {
+        align-items: center;
+        display: flex;
+    }
+
+    .variant-grid_header {
+        background-color: #171718;
+        color: #fff;
+        font-size: remCalc(12px);
+        font-weight: 600;
+        line-height: 1;
+        text-transform: uppercase;
+
+        small {
+            font-size: remCalc(10px);
+        }
+
+        svg {
+            vertical-align: middle;
+
+            @include breakpoint("medium") {
+                margin-right: 0.4em;
+            }
+            @include -breakpoint("medium") {
+                margin-top: 0.4em;
+            }
+        }
+
+        .variant-grid_cell {
+            padding: 17px 0;
+
+            @include -breakpoint("medium") {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+    }
+
+    .variant-grid_filters {
+        align-items: stretch;
+        border: 1px solid #D6DBE2;
+
+        .variant-grid_cell {
+            border-right: 1px solid #D6DBE2;
+            padding: 0;
+
+            &.--qty,
+            &.--price {
+                border-right-width: 0;
+            }
+        }
+    }
+
+    .variant-grid_cell {
+        flex-basis: 0;
+        flex-grow: 1;
+        flex-shrink: 0;
+        overflow: hidden;
+        padding: 7px 0;
+        text-align: center;
+
+        &.--qty {
+            max-width: 80px;
+        }
+
+        &.--price {
+            max-width: 90px;
+        }
+    }
+
+    .variant-grid_filter {
+        appearance: none;
+        background-image: url('../img/icons/dark/chevron-down-small.svg');
+        background-position: right 12px center;
+        background-repeat: no-repeat;
+        background-size: 16px 8px;
+        border: none;
+        border-radius: 0;
+        height: remCalc(46px);
+        padding: 0 42px 0 16px;
+        text-transform: uppercase;
+        width: 100%;
+
+        @include breakpoint("medium") {
+            font-size: remCalc(12px);
+        }
+    }
+
+    .variant-qty {
+        display: inline-flex;
+
+        input {
+            background: #FFF;
+            border: 1px solid #D6DBE2;
+            border-radius: 3px;
+            text-align: center;
+            width: remCalc(32px);
+            height: remCalc(32px);
+        }
+    }
+
+    .variant-select {
+        background-color: var(--colour-green);
+        border: none;
+        border-radius: 3px;
+        color: #fff;
+        font-size: remCalc(14px);
+        font-weight: 600;
+        opacity: 1;
+        padding: remCalc(5px);
+        transition: opacity 0.4s;
+        width: 90%;
+    }
+}
+
+
+.variant-grid_tooltip {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+
+    @include -breakpoint("medium") {
+        order: 99;
+    }
+}

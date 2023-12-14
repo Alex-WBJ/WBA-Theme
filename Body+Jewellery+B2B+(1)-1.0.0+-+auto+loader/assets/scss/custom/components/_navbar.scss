@@ -1,0 +1,18 @@
+.navBar--mobileSelect {
+    .navBar-section {
+        @include -breakpoint("medium") {
+            display: none;
+        }
+    }
+
+    select {
+        background-color: #eee;
+        border-width: 0 0 1px;
+        font-size: remCalc(16px);
+        padding: 10px;
+
+        @include breakpoint("medium") {
+            display: none;
+        }
+    }
+}

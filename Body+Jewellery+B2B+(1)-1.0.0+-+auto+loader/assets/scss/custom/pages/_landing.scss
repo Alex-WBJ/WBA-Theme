@@ -1,0 +1,19 @@
+[data-content-region="page_builder_content"],
+[data-content-region="page_banner"] {
+    [data-sub-layout] {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+.page_title__jewellery,
+.page_title__tattoo {
+    .body {
+        margin-bottom: 0;
+        margin-top: 0;
+        overflow: hidden;
+    }
+
+    .info-bar {
+        width: 100vw;
+    }
+}

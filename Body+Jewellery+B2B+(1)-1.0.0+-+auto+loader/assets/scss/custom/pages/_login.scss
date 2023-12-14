@@ -1,0 +1,22 @@
+.page_type__login {
+    .breadcrumbs {
+        display: none;
+    }
+}
+
+.login-form {
+    .form-actions {
+        @extend %unsetClearFix;
+
+        align-items: center;
+        display: flex;
+        text-align: left;
+        justify-content: space-between;
+    }
+}
+
+.new-customer {
+    .panel {
+        @extend %panel;
+    }
+}

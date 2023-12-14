@@ -1,0 +1,33 @@
+{{#if customer}}
+<a class="reorder-cta --user" href="{{theme_settings.user_quick_reorder}}" data-orders="{{json orders}}">
+    <div class="reorder-cta_inner">
+        <svg width="65" height="36" viewBox="0 0 65 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M33 7.80006L38.1667 1.00006H58.8333L64 7.80006M33 7.80006L30 31.6001C30 32.5018 30.3629 33.3666 31.0089 34.0042C31.6548 34.6418 32.5309 35.0001 33.4444 35.0001H57.5556C58.4691 35.0001 59.3452 34.6418 59.9911 34.0042C60.6371 33.3666 61 32.5018 61 31.6001L64 7.80006M33 7.80006H64M55.3889 14.6001C55.3889 16.4035 53.6631 18.1331 52.3712 19.4084C51.0793 20.6836 49.327 21.4001 47.5 21.4001C45.673 21.4001 43.9207 20.6836 42.6288 19.4084C41.3369 18.1331 41.6111 16.4035 41.6111 14.6001M22 8.00006L1 8.00006M20 19.0001L6 19.0001M19 30.0001H12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <h2>{{lang "widget.reorder.quick_reorder"}}</h2>
+        <div class="reorder-cta_text">
+            <h3>{{lang "widget.reorder.welcome_back"}} <span>{{ customer.name }}</span></h3>
+            <p>{{lang "widget.reorder.previous_order"}}</p>
+        </div>
+
+        <svg width="17" height="30" viewBox="0 0 17 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 27.0001L15 15.0001L3 3.00006" stroke="white" stroke-width="4" stroke-linecap="square" stroke-linejoin="round"/>
+        </svg>
+    </div>
+</a>
+{{else}}
+<a class="reorder-cta --login" href="{{urls.auth.login}}">
+    <div class="reorder-cta_inner">
+        <svg width="32" height="38" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 19V17C17 15.9391 16.5786 14.9217 15.8284 14.1716C15.0783 13.4214 14.0609 13 13 13H5C3.93913 13 2.92172 13.4214 2.17157 14.1716C1.42143 14.9217 1 15.9391 1 17V19M13 5C13 7.20914 11.2091 9 9 9C6.79086 9 5 7.20914 5 5C5 2.79086 6.79086 1 9 1C11.2091 1 13 2.79086 13 5Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <h2>{{lang "widget.reorder.sign_up"}}</h2>
+
+        <svg width="17" height="30" viewBox="0 0 17 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 27.0001L15 15.0001L3 3.00006" stroke="white" stroke-width="4" stroke-linecap="square" stroke-linejoin="round"/>
+        </svg>
+    </div>
+</a>
+{{/if}}

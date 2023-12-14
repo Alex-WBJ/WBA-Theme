@@ -1,0 +1,195 @@
+<article
+    class="card card-product
+    {{#if alternate}} card--alternate{{/if}}"
+    data-product="card-{{id}}"
+    data-product-id="{{id}}"
+    data-product-category="{{#each category}}{{#if @last}}{{this}}{{else}}{{this}},{{/if}}{{/each}}"
+    {{#if settings.data_tag_enabled}}
+        data-event-type="{{event}}"
+        data-entity-id="{{id}}"
+        data-position="{{position}}"
+        data-name="{{name}}"
+        data-product-brand="{{brand.name}}"
+        data-product-price="
+        {{#or customer (unless theme_settings.restrict_to_login)}}
+            {{#if price.with_tax}}
+                {{price.with_tax.value}}
+            {{else}}
+                {{price.without_tax.value}}
+            {{/if}}
+        {{else}}
+            {{lang 'common.login_for_pricing'}}
+        {{/or}}"
+    {{/if}}>
+    <figure class="card-figure">
+        {{#if stock_level '===' 0}}
+            {{#if theme_settings.pdp_sold_out_label '===' ''}}
+                {{> components/products/product-badge
+                    badge-type='sold-out'
+                    badge_view=theme_settings.product_sold_out_badges
+                    badge_label=(lang "page_builder.pdp_sold_out_label")
+                }}
+            {{else}}
+                {{> components/products/product-badge
+                    badge-type='sold-out'
+                    badge_view=theme_settings.product_sold_out_badges
+                    badge_label=theme_settings.pdp_sold_out_label
+                }}
+            {{/if}}
+        {{else}}
+            {{#or price.sale_price_with_tax.value price.sale_price_without_tax.value}}
+                {{#if theme_settings.pdp_sale_badge_label '===' ''}}
+                    {{> components/products/product-badge
+                        badge-type='sale'
+                        badge_view=theme_settings.product_sale_badges
+                        badge_label=(lang "page_builder.pdp_sale_badge_label")
+                    }}
+                {{else}}
+                    {{> components/products/product-badge
+                        badge-type='sale'
+                        badge_view=theme_settings.product_sale_badges
+                        badge_label=theme_settings.pdp_sale_badge_label
+                    }}
+                {{/if}}
+            {{/or}}
+        {{/if}}
+
+        <a href="{{url}}"
+           class="card-figure__link"
+           aria-label="{{> components/products/product-info}}"
+           {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}}
+        >
+            <div class="card-img-container">
+                {{> components/common/responsive-img
+                    image=image
+                    class="card-image"
+                    fallback_size=theme_settings.productgallery_size
+                    lazyload=theme_settings.lazyload_mode
+                    default_image=theme_settings.default_image_product
+                }}
+            </div>
+        </a>
+
+        <figcaption class="card-figcaption">
+            <div class="card-figcaption-body">
+                {{!-- {{#unless hide_product_quick_view}}
+                    {{#if theme_settings.show_product_quick_view}}
+                        {{#if settings.data_tag_enabled}}
+                            <button type="button" class="button button--small card-figcaption-button quickview" data-event-type="product-click" data-product-id="{{id}}">{{lang 'products.quick_view'}}</button>
+                        {{else}}
+                            <button type="button" class="button button--small card-figcaption-button quickview" data-product-id="{{id}}">{{lang 'products.quick_view'}}</button>
+                        {{/if}}
+                    {{/if}}
+                {{/unless}} --}}
+                {{#if show_compare}}
+                    <label class="button button--small card-figcaption-button" for="compare-{{id}}">
+                        {{lang 'products.compare'}} <input type="checkbox" name="products[]" value="{{id}}" id="compare-{{id}}" data-compare-id="{{id}}">
+                    </label>
+                {{/if}}
+                {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                    {{#if show_cart_action}}
+                        {{!-- {{#if has_options}}
+                            <a href="{{url}}" data-event-type="product-click" class="button button--small card-figcaption-button" data-product-id="{{id}}">{{lang 'products.choose_options'}}</a>
+                        {{/if}} --}}
+                        {{#if pre_order}}
+                            <a href="{{pre_order_add_to_cart_url}}" data-event-type="product-click" class="button button--small card-figcaption-button">{{lang 'products.pre_order'}}</a>
+                        {{/if}}
+                        {{#if add_to_cart_url }}
+                            <a href="{{add_to_cart_url}}" data-event-type="product-click" data-button-type="add-cart" class="button button--small card-figcaption-button">{{lang 'products.add_to_cart'}}</a>
+                            <span class="product-status-message aria-description--hidden">{{lang 'category.add_cart_announcement'}}</span>
+                        {{/if}}
+                        {{#if out_of_stock_message }}
+                            <a href="{{url}}" data-event-type="product-click" class="button button--small card-figcaption-button" data-product-id="{{id}}">{{out_of_stock_message}}</a>
+                        {{/if}}
+                    {{/if}}
+                {{/or}}
+            </div>
+        </figcaption>
+    </figure>
+    <div class="card-body {{#if customer '===' null}}guest{{/if}}">
+        {{#and rating show_rating}}
+            <p class="card-text" data-test-info-type="productRating">
+                <span class="rating--small">
+                    {{> components/products/ratings rating_target=name rating=rating}}
+                </span>
+            </p>
+        {{/and}}
+        {{#if brand.name}}
+            <p class="card-text" data-test-info-type="brandName">{{brand.name}}</p>
+        {{/if}}
+        <h3 class="card-title">
+            <a aria-label="{{> components/products/product-info}}"
+               href="{{url}}"
+               {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}}
+            >
+                {{name}}
+            </a>
+        </h3>
+        <div class="card-info">
+            <div class="card-sku">
+                <span>{{lang "products.sku"}}</span> {{sku}}
+            </div>
+
+            {{#if out_of_stock_message }}
+            <div class="card-stock --out-of-stock">
+                {{lang "products.out_of_stock"}}
+            </div>
+            {{else}}
+            <div class="card-stock --in-stock">
+                {{lang "products.in_stock"}}
+            </div>
+            {{/if}}
+        </div>
+
+        <div class="card-text card-text--price" data-test-info-type="price">
+            {{#unless customer}}
+                {{> components/common/login-for-pricing}}
+            {{/unless}}
+
+            {{#if this.price}}
+                {{> components/products/price price=price}}
+            {{/if}}
+        </div>
+
+        {{> components/products/bulk-discount-rates}}
+
+        {{#if has_options}}
+        <a href="{{url}}" class="button button-add-to-cart" data-product-id="{{id}}" data-event-type="product-click">
+            <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1H4.63636L7.07273 13.1148C7.15586 13.5313 7.38355 13.9055 7.71595 14.1718C8.04835 14.4381 8.46427 14.5796 8.89091 14.5714H17.7273C18.1539 14.5796 18.5698 14.4381 18.9022 14.1718C19.2346 13.9055 19.4623 13.5313 19.5455 13.1148L21 5.52381H5.54545M9.18182 19.0952C9.18182 19.5949 8.7748 20 8.27273 20C7.77065 20 7.36364 19.5949 7.36364 19.0952C7.36364 18.5956 7.77065 18.1905 8.27273 18.1905C8.7748 18.1905 9.18182 18.5956 9.18182 19.0952ZM19.1818 19.0952C19.1818 19.5949 18.7748 20 18.2727 20C17.7707 20 17.3636 19.5949 17.3636 19.0952C17.3636 18.5956 17.7707 18.1905 18.2727 18.1905C18.7748 18.1905 19.1818 18.5956 19.1818 19.0952Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>{{lang "products.choose_option"}}</span>
+        </a>
+        {{else}}
+            {{#if add_to_cart_url}}
+                <button type="button" class="button button-add-to-cart quickview" data-product-id="{{id}}">
+                    <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1H4.63636L7.07273 13.1148C7.15586 13.5313 7.38355 13.9055 7.71595 14.1718C8.04835 14.4381 8.46427 14.5796 8.89091 14.5714H17.7273C18.1539 14.5796 18.5698 14.4381 18.9022 14.1718C19.2346 13.9055 19.4623 13.5313 19.5455 13.1148L21 5.52381H5.54545M9.18182 19.0952C9.18182 19.5949 8.7748 20 8.27273 20C7.77065 20 7.36364 19.5949 7.36364 19.0952C7.36364 18.5956 7.77065 18.1905 8.27273 18.1905C8.7748 18.1905 9.18182 18.5956 9.18182 19.0952ZM19.1818 19.0952C19.1818 19.5949 18.7748 20 18.2727 20C17.7707 20 17.3636 19.5949 17.3636 19.0952C17.3636 18.5956 17.7707 18.1905 18.2727 18.1905C18.7748 18.1905 19.1818 18.5956 19.1818 19.0952Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>{{lang 'products.add_to_cart'}}</span>
+                </button>
+            {{else}}
+                <a href="{{#if add_to_cart_url }}{{add_to_cart_url}}{{else}}{{url}}{{/if}}" class="button button-add-to-cart" data-product-id="{{id}}" data-event-type="product-click" {{#if add_to_cart_url }}data-action="addtocart"{{/if}}>
+                    <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1H4.63636L7.07273 13.1148C7.15586 13.5313 7.38355 13.9055 7.71595 14.1718C8.04835 14.4381 8.46427 14.5796 8.89091 14.5714H17.7273C18.1539 14.5796 18.5698 14.4381 18.9022 14.1718C19.2346 13.9055 19.4623 13.5313 19.5455 13.1148L21 5.52381H5.54545M9.18182 19.0952C9.18182 19.5949 8.7748 20 8.27273 20C7.77065 20 7.36364 19.5949 7.36364 19.0952C7.36364 18.5956 7.77065 18.1905 8.27273 18.1905C8.7748 18.1905 9.18182 18.5956 9.18182 19.0952ZM19.1818 19.0952C19.1818 19.5949 18.7748 20 18.2727 20C17.7707 20 17.3636 19.5949 17.3636 19.0952C17.3636 18.5956 17.7707 18.1905 18.2727 18.1905C18.7748 18.1905 19.1818 18.5956 19.1818 19.0952Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>{{lang "products.add_to_cart"}}</span>
+                </a>
+            {{/if}}
+        {{/if}}
+
+        <div class="card-wishlist" data-wishlist-add>
+            <button class="js-wishlist" data-id="{{id}}">
+                <svg width="23" height="20" viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.2913 2.61183C19.7805 2.10083 19.1741 1.69547 18.5066 1.41891C17.8392 1.14235 17.1238 1 16.4013 1C15.6788 1 14.9634 1.14235 14.2959 1.41891C13.6285 1.69547 13.022 2.10083 12.5113 2.61183L11.4513 3.67183L10.3913 2.61183C9.3596 1.58013 7.96032 1.00053 6.50129 1.00053C5.04226 1.00053 3.64298 1.58013 2.61129 2.61183C1.5796 3.64352 1 5.04279 1 6.50183C1 7.96086 1.5796 9.36013 2.61129 10.3918L11.4513 19.2318L20.2913 10.3918C20.8023 9.88107 21.2076 9.27464 21.4842 8.60718C21.7608 7.93972 21.9031 7.22431 21.9031 6.50183C21.9031 5.77934 21.7608 5.06393 21.4842 4.39647C21.2076 3.72901 20.8023 3.12258 20.2913 2.61183Z" stroke="#171718" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+
+            <ul class="wishlist-menu">
+                <li>
+                    <a href="/wishlist.php?action=addwishlist&product_id={{id}}">{{lang "account.wishlists.create_new"}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</article>

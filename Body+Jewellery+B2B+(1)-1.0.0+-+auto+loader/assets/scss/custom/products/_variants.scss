@@ -1,0 +1,385 @@
+@import 'variants-tattoo';
+@import 'variants-grid';
+@import 'variants-complex';
+
+#variantTable {
+    position: relative;
+
+    &::before {
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.4);
+        border-radius: 10px;
+        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.4);
+        color: #fff;
+        content: 'Loading...';
+        display: flex;
+        font-size: remCalc(16px);
+        font-weight: 700;
+        inset: -5px;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        transition: opacity 0.4s;
+        z-index: 10;
+    }
+
+    &.--loading {
+        min-height: remCalc(200px);
+
+        &::before {
+            opacity: 1;
+            pointer-events: initial;
+        }
+    }
+
+    h2 {
+        font-size: remCalc(16px);
+        font-weight: 700;
+        margin: 0 0 remCalc(20px);
+        text-transform: uppercase;  
+    }
+
+    table {
+        border: 1px solid #D6DBE2;
+        width: 100%;
+    }
+
+    th {
+        background-color: #171718;
+        color: #fff;
+        font-size: remCalc(12px);
+        font-weight: 600;
+        line-height: 1;
+        padding: 17px 0;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    td {
+        border-bottom: 1px solid #D6DBE2;
+        font-size: remCalc(14px);
+        font-weight: 400;
+        line-height: 1;
+        padding: 15px 17px;
+        text-align: center;
+    }
+
+    tr {
+        &:nth-child(even) {
+            background-color: #F2F6FB;
+        }
+    }
+
+    + .button {
+        margin-top: remCalc(28px);
+
+        @include -breakpoint("medium") {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+    }
+
+    .th-variant-qty {
+        text-align: center;
+    }
+}
+
+.colour-modal {
+    background-color: rgba(0, 0, 0, 0.4);
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    transition: opacity 0.4s;
+    z-index: 999;
+
+    &.--show {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .button {
+        width: 100%;
+        margin: 10px 0 0;
+    }
+}
+
+.colour-modal-content {
+    background-color: #fff;
+    padding: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90%;
+    transform: translate(-50%, -50%);
+
+    h2 {
+        font-size: remCalc(16px);
+        font-weight: 700;
+        margin: 0;
+        text-align: left;
+        text-transform: uppercase;
+    }
+}
+
+.colour-modal-grid {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 24px;
+    
+    @include breakpoint("medium") {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    @include breakpoint("large") {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.colour-modal-item {
+    --border-colour: #D6DBE2;
+    align-items: stretch;
+    border: 1px solid var(--border-colour);
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    position: relative;
+    transition: border-color 0.4s;
+
+    &::before {
+        background-color: #21AC79;
+        background-image: url('../img/icons/green/check-roundal.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 100%;
+        content: '';
+        opacity: 0;
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        width: 20px;
+        height: 20px;
+        transition: opacity 0.4s;
+        z-index: 10;
+    }
+
+    &.--active {
+        --border-colour: #21AC79;
+
+        &::before {
+            opacity: 1;
+        }
+    }
+}
+
+.colour-modal-item-name {
+    border-top: 1px solid var(--border-colour);
+    font-size: remCalc(12px);
+    font-weight: 700;
+    line-height: 1.5;
+    padding: 15px 0;
+    text-align: center;
+}
+.colour-modal-item-image {
+    position: relative;
+
+    &::before {
+        content: '';
+        display: block;
+        padding-bottom: 100%;
+    }
+
+    img {
+        object-fit: contain;
+        object-position: center;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.color-modal-item-colour-swatch {
+    --colour-1: transparent;
+    --colour-2: transparent;
+    --colour-3: transparent;
+    position: absolute;
+    inset: 0;
+
+    &.--colours-1 {
+        background-color: var(--colour-1);
+    }
+
+    &.--colours-2 {
+        background-image: linear-gradient(135deg, var(--colour-1), var(--colour-2));
+    }
+
+    &.--colours-3 {
+        background-image: linear-gradient(135deg, var(--colour-1), var(--colour-2), var(--colour-3));
+    }
+}
+
+.colour-modal-close {
+    background-image: url('../img/icons/dark/close.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    padding: 0;
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    width: 18px;
+    height: 18px;
+}
+
+.colour-modal-apply {}
+
+.variant-select-colour {
+    background-image: url('../img/icons/dark/chevron-down-small.svg');
+    background-position: right 2px center;
+    background-repeat: no-repeat;
+    font-size: remCalc(10px);
+    font-weight: 600;
+    overflow: hidden;
+    padding: 4px 12px 4px 2px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+
+    @include breakpoint("small") {
+        padding: 4px 14px 4px 4px;
+    }
+
+    @include breakpoint("medium") {
+        background-position: right 4px center;
+        padding: 6px 24px 6px 6px;
+    }
+
+    @include breakpoint("large") {
+        background-image: url('../img/icons/colours.png'), url('../img/icons/dark/chevron-down-small.svg');
+        background-position: 4px center, right 4px center;
+        font-size: remCalc(14px);
+        padding-right: 24px;
+    }
+}
+
+.variant-scroll-frame {
+    @include breakpoint("medium") {
+        overflow: auto;
+        max-height: 420px;
+        margin-right: -20px;
+
+        // Scrollbars?
+        scrollbar-color: #171718 #F2F5FB;
+
+        &::-webkit-scrollbar {
+            width: 10px; /* Mostly for vertical scrollbars */
+            height: 10px; /* Mostly for horizontal scrollbars */
+            border-radius: 5px;
+        }
+        &::-webkit-scrollbar-thumb { /* Foreground */
+            background: #171718;
+            border-radius: 5px;
+        }
+        &::-webkit-scrollbar-track { /* Background */
+            background: #F2F5FB;
+            border-radius: 5px;
+        }
+    
+        .variant-grid,
+        .variant-tattoo-grid {
+            max-width: var(--variant-width);
+        }
+    }
+}
+
+.variant-footer {
+    align-items: center;
+    border: 1px solid #D6DBE2;
+    display: flex;
+    font-size: remCalc(16px);
+    font-weight: 700;
+    justify-content: space-between;
+    line-height: 1;
+    margin-top: -1px;
+    padding: 16px;
+    text-transform: uppercase;
+}
+
+.variant-pagination {
+    align-items: center;
+    border: 1px solid #D6DBE2;
+    display: flex;
+    margin-top: -1px;
+
+    @include breakpoint("medium") {
+        display: none;
+    }
+
+    .variant-pagination_button {
+        border: none;
+        display: block;
+        padding: 0;
+
+        svg {
+            display: block;
+        }
+    }
+    .variant-pagination_prev {
+        margin-right: auto;
+    }
+    .variant-pagination_next {
+        margin-left: auto;
+    }
+    .variant-pagination_pages {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-grow: 1;
+    }
+    .variant-pagination_page {
+        border: none;
+        color: #171718;
+        width: 35px;
+        height: 35px;
+        margin: 0 4px;
+        padding: 0;
+
+        &.--current-page {
+            background-color: #171718;
+            color: #fff;
+        }
+    }
+}
+
+.variant-container {
+    --variant-columns: 1;
+    --variant-rows: 1;
+    --variant-width: 600px;
+
+    // &:not(.--no-pagination) {
+    //     .variant-row[data-page] {
+    //         &:not(.--current-page) {
+    //             @include -breakpoint("medium") {
+    //                 display: none;
+    //             }
+    //         }
+    //     }
+    // }
+
+    .paged-item {
+        &.--pagination-hidden {
+            @include -breakpoint("medium") {
+                display: none;
+            }
+        }
+    }
+}

@@ -1,0 +1,57 @@
+<fieldset class="form-fieldset actionBar-section">
+    <div class="form-field form-field--per-page">
+        <label class="form-label" for="limit">{{lang 'category.show'}}</label>
+
+        <select class="form-select form-select-small" name="limit" id="limit" onchange="location='?limit='+this.value">
+            <option value="6" {{#if '6' '==' theme_settings.categorypage_products_per_page }}selected{{/if}}>6</option>
+            <option value="8" {{#if '8' '==' theme_settings.categorypage_products_per_page }}selected{{/if}}>8</option>
+            <option value="9" {{#if '9' '==' theme_settings.categorypage_products_per_page }}selected{{/if}}>9</option>
+            <option value="12" {{#if '12' '==' theme_settings.categorypage_products_per_page }}selected{{/if}}>12</option>
+            <option value="15" {{#if '15' '==' theme_settings.categorypage_products_per_page }}selected{{/if}}>15</option>
+            <option value="16" {{#if '16' '==' theme_settings.categorypage_products_per_page }}selected{{/if}}>16</option>
+            <option value="18" {{#if '18' '==' theme_settings.categorypage_products_per_page }}selected{{/if}}>18</option>
+            <option value="20" {{#if '20' '==' theme_settings.categorypage_products_per_page }}selected{{/if}}>20</option>
+            <option value="24" {{#if '24' '==' theme_settings.categorypage_products_per_page }}selected{{/if}}>24</option>
+            <option value="30" {{#if '36' '==' theme_settings.categorypage_products_per_page }}selected{{/if}}>30</option>
+        </select>
+
+        <label class="form-label" for="limit"> {{lang 'category.per_page'}}</label>
+        <script>
+            (function() {
+                try {
+                    var url = new URL(window.location.href);
+                    var c = url.searchParams.get("limit");
+                    if (c != null) {
+                        var limit = document.querySelectorAll('select#limit option');
+                        Array.prototype.forEach.call(limit, function(element) {
+                            if (element.value == c) {
+                                element.selected = true;
+                            }
+                        });
+                    }
+                } catch (e) {}
+            }());
+        </script>
+    </div>
+
+    <div class="form-field form-field--sort-by">
+        <label class="form-label" for="sort">
+            <span>{{lang 'category.sort_by'}}</span>
+            <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.5 2.5L7.5 7.5L2.5 2.5" stroke="#171718" stroke-width="3" stroke-linecap="square"/></svg>
+        </label>
+
+        <select class="form-select form-select--small " name="sort" id="sort" role="listbox">
+            <option value="featured" {{#if sort '==' 'featured'}}selected{{/if}}>{{lang 'common.sorter.featured'}}</option>
+            <option value="newest" {{#if sort '==' 'newest'}}selected{{/if}}>{{lang 'common.sorter.newest'}}</option>
+            <option value="bestselling" {{#if sort '==' 'bestselling'}}selected{{/if}}>{{lang 'common.sorter.top_sellers'}}</option>
+            <option value="alphaasc" {{#if sort '==' 'alphaasc'}}selected{{/if}}>{{lang 'common.sorter.alpha_asc'}}</option>
+            <option value="alphadesc" {{#if sort '==' 'alphadesc'}}selected{{/if}}>{{lang 'common.sorter.alpha_desc'}}</option>
+            <option value="avgcustomerreview" {{#if sort '==' 'avgcustomerreview'}}selected{{/if}}>{{lang 'common.sorter.reviews'}}</option>
+            <option value="priceasc" {{#if sort '==' 'priceasc'}}selected{{/if}}>{{lang 'common.sorter.price_asc'}}</option>
+            <option value="pricedesc" {{#if sort '==' 'pricedesc'}}selected{{/if}}>{{lang 'common.sorter.price_desc'}}</option>
+            {{#if result_count}}
+                <option value="relevance" {{#if sort '==' 'relevance'}}selected{{/if}}>{{lang 'common.sorter.relevance'}}</option>
+            {{/if}}
+        </select>
+    </div>
+</fieldset>
